@@ -15,6 +15,8 @@ vetements du moment etc...
 
 C'est un blog à l'esthétique des années 2000 (Skyblog, MSN, MySpace) qui propose des articles (mode, voyages, design), des quiz de personnalité et une sélection de musiques du moment. Avec un compte, chaque membre retrouve ses résultats de quiz, ses musiques et images favorites et un profil personnalisable.
 
+## Maquette Figma : https://scuff-global-39594034.figma.site/ 
+
 **Rôles :** visiteur·euse (consulte les contenus publics), membre (passe les quiz, gère ses favoris et son profil), administrateur·ice (gère tous les contenus).
 
 ## 3. Fonctionnalités principales
