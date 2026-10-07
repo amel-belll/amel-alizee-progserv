@@ -7,6 +7,7 @@
 - Amel Bellal
 - Alizée de Landerset
 
+## Lien maquette : https://scuff-global-39594034.figma.site/
 ## 2. Présentation
 
 C'est un blog à l'esthétique des années 2000 (Skyblog, MSN, MySpace) qui propose
