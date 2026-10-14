@@ -29,7 +29,7 @@ INSERT INTO musique (titre, artiste, genre, lien)
 VALUES ('Toxic', 'Britney Spears', 'Pop', 'LOREZ1kAm5c'),
        ('Crazy in Love', 'Beyoncé', 'R&B', 'ViwtNLUqkMY');
 
-INSERT INTO image (titre, fichiergit status, id_categorie) VALUES ('Tenue Y2K', 'tenue.jpg', 1);
+INSERT INTO image (titre, fichier, id_categorie) VALUES ('Tenue Y2K', 'tenue.jpg', 1);
 
 -- Des favoris et un résultat de quiz pour Alizée (id 2)
 INSERT INTO musique_favorite (id_utilisateur, id_musique, date_ajout) VALUES (2, 1, NOW());
