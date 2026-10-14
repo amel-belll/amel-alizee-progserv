@@ -1,233 +1,191 @@
-# HEIG-VD ProgServ2 Course PHP Template
+# Zoomy
 
-Ce modèle de projet est conçu pour les étudiant.es du cours
-[_"Programmation Serveur 2 (ProgServ2)"_](https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course)
-à la [HEIG-VD](https://heig-vd.ch).
+Blog communautaire à l'esthétique des années 2000 (Skyblog, MSN, MySpace,
+Frutiger Aero) avec des articles, des quiz de personnalité, des musiques du
+moment et une galerie d'images.
 
-Il fournit une structure de base pour les projets PHP avec les éléments suivants
-:
+> Projet réalisé dans le cadre du cours
+> [Programmation serveur 2 (ProgServ2)](https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course)
+> à la [HEIG-VD](https://heig-vd.ch), année académique 2026-2027.
 
-- Un serveur [Apache](https://httpd.apache.org/) avec
-  [PHP 8.5](https://www.php.net/) et les extensions nécessaires pour se
-  connecter à une base de données [MariaDB](https://mariadb.org/).
-- Une base de données [MariaDB](https://mariadb.org/) préconfigurée avec un
-  utilisateur et un mot de passe par défaut. Dans vos scripts PHP, utilisez le
-  nom d'hôte `mariadb` et les identifiants définis dans le fichier
-  `compose.yaml`.
-- Une interface web [phpMyAdmin](https://www.phpmyadmin.net/) pour gérer la base
-  de données MariaDB en utilisant les mêmes identifiants que ceux définis dans
-  le fichier `compose.yaml`.
-- Un serveur SMTP [Mailpit](https://mailpit.axllent.org/) pour tester l'envoi
-  d'e-mails depuis votre application PHP.
-- Des configurations recommandées pour l'éditeur de code
-  [Visual Studio Code](https://code.visualstudio.com/), y compris des extensions
-  utiles pour le développement PHP et la gestion de bases de données
-  ([PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client),
-  [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode),
-  [SQLite Viewer](https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer)).
+🌐 **Site en ligne :** <https://progserv2.amelontour.ch>
 
-Tous ses éléments sont configurés pour fonctionner avec
-[Docker Compose](https://docs.docker.com/compose/), ce qui permet de créer un
-environnement de développement isolé et reproductible.
+## Table des matières
 
-N'hésitez pas à personnaliser ce modèle et ce document pour ajouter des
-instructions spécifiques à votre projet ou des détails supplémentaires sur la
-configuration et l'utilisation du projet.
+- [Présentation du projet](#présentation-du-projet)
+- [Membres du groupe](#Amel-et-Alizée)
+- [Documentation du projet](#documentation-du-projet)
+- [Technologies utilisées](#technologies-utilisées)
+- [Structure du dépôt](#structure-du-dépôt)
+- [Lancer le projet en local](#lancer-le-projet-en-local)
+- [Déployer le projet sur Infomaniak](#déployer-le-projet-sur-infomaniak)
+- [Organisation du travail](#organisation-du-travail)
+- [Utilisation de l'IA](#utilisation-de-lia)
+- [Conclusion](#conclusion)
 
-## Utiliser ce modèle pour votre projet
+## Présentation du projet
 
-1. Cliquez sur le bouton "Use this template" (Utiliser ce modèle) sur la page
-   GitHub de ce dépôt.
-2. Donnez un nom à votre nouveau dépôt et configurez les options selon vos
-   préférences.
-3. Invitez les membres de votre équipe à collaborer sur le projet en leur
-   donnant accès au dépôt (si applicable).
-4. Chaque membre de l'équipe doit cloner le nouveau dépôt sur sa machine locale
-   pour commencer à travailler sur le projet.
-5. Utilisez le workflow GitHub étudié en cours pour gérer les branches, les
-   commits et les pull requests afin de collaborer efficacement sur le projet.
+Le site propose :
 
-## Structure du projet
+- des **articles** classés par catégorie (Mode, Voyages, Design) ;
+- des **quiz de personnalité** dont le résultat révèle un « aesthetic » ;
+- une sélection de **musiques du moment** avec un lecteur intégré ;
+- une **galerie d'images** d'inspiration.
 
-- `.devcontainer/`: Contient la configuration pour le développement dans un
-  conteneur Debian (Trixie) avec Visual Studio Code.
-- `.vscode/`: Contient les paramètres recommandés pour Visual Studio Code.
-- `.gitignore`: Fichier de configuration pour Git, spécifiant les fichiers et
-  dossiers à ignorer.
-- `compose.yaml`: Fichier de configuration pour Docker Compose, définissant les
-  services nécessaires pour le projet, avec :
-  - [Apache](https://httpd.apache.org/) : Serveur web pour exécuter les fichiers
-    PHP.
-  - [MariaDB](https://mariadb.org/) : Base de données relationnelle.
-  - [phpMyAdmin](https://www.phpmyadmin.net/) : Interface web pour gérer la base
-    de données MariaDB.
-  - [Mailpit](https://mailpit.axllent.org/) : Serveur SMTP pour tester l'envoi
-    d'e-mails.
-- `index.php`: Fichier PHP principal du projet.
-- `script.sql`: Fichier SQL pour créer la table `my_table` dans la base de
-  données.
-- `README.md`: Ce fichier de documentation.
+Les visiteur·euses peuvent consulter tous les contenus publics. Avec un compte,
+les membres peuvent passer les quiz, retrouver leurs résultats, mettre des
+musiques et des images en favoris et personnaliser leur profil. Les
+administrateur·ices gèrent l'ensemble des contenus.
 
-## Ouvrir le projet localement
+Le détail des fonctionnalités se trouve dans le
+[cahier des charges](./cahier-charges.md).
 
-> [!NOTE]
->
-> Il est important d'ouvrir le dossier du projet directement et non un dossier
-> parent.
->
-> Pensez à bien ouvrir le dossier du projet lui-même (celui qui contient ce
-> fichier README.md) et non un dossier parent. Ouvrir un dossier parent peut
-> entraîner des problèmes de configuration et de fonctionnement de Visual Studio
-> Code.
+## Membres du groupe
 
-1. Clonez ce dépôt sur votre machine locale.
-2. Ouvrez ce dossier dans Visual Studio Code.
+| Membre | Rôles et contributions |
+| ------ | ---------------------- |
+| Amel Bellal | base de données, déploiement, page des articles, relecture des PR)_ |
+| Alizée de Landerset | maquette, page des musiques, relecture des PR)_ |
 
-## Ouvrir le projet dans un conteneur de développement
+## Documentation du projet
 
-Si vous avez l'extension
-[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-installée, Visual Studio Code vous proposera d'ouvrir le projet dans un
-conteneur Docker.
+- [Cahier des charges](./cahier-charges.md)
+- [Maquette Figma](https://scuff-global-39594034.figma.site/)
+- Schéma de la base de données :
+  - [Modèle conceptuel (MCD)](./docs/mcd.png)
+  - [Modèle logique (MLD)](./docs/mld.png)
+  - [Modèle physique (MPD)](./docs/mpd(1).png)
+  - [Script de création des tables](./src/db/script.sql)
+  - [Données de test](./src/db/donnees-test.sql)
 
-Acceptez cette proposition pour bénéficier d'un environnement de développement
-préconfiguré.
+## Technologies utilisées
 
-Si aucune notification n'apparaît, vous pouvez ouvrir manuellement le conteneur
-en utilisant la commande _"Dev Containers: Reopen in Container"_ dans la palette
-de commandes (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> sur Windows/Linux ou
-<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> sur macOS).
+- [PHP 8.5](https://www.php.net/), sans framework, en programmation orientée
+  objet
+- [MariaDB](https://mariadb.org/) pour la base de données
+- [Docker Compose](https://docs.docker.com/compose/) pour l'environnement de
+  développement (Apache, MariaDB, phpMyAdmin et Mailpit), fourni par le
+  [template du cours](https://github.com/heig-vd-progserv-course/heig-vd-progserv2-course-php-template)
+- [Infomaniak](https://www.infomaniak.com/) pour l'hébergement en production
 
-## Démarrer les services Docker
+## Structure du dépôt
 
-Pour démarrer les services Docker nécessaires à développer des applications PHP,
-ouvrez un terminal intégré dans Visual Studio Code et exécutez la commande
-suivante :
-
-```bash
-# Démarre tous les services définis dans le fichier compose.yaml
-docker compose up
+```text
+.
+├── docs/                      Diagrammes de la base de données (MCD, MLD, MPD)
+├── src/
+│   ├── classes/               Classes PHP (chargées automatiquement)
+│   │   ├── Database.php       Connexion à la base de données
+│   │   └── DatabaseInterface.php
+│   ├── config/
+│   │   └── database.ini.example   Modèle du fichier de configuration
+│   ├── db/
+│   │   ├── script.sql         Création des tables
+│   │   └── donnees-test.sql   Données de test
+│   ├── public/                Pages accessibles depuis le navigateur
+│   │   └── index.php          Page d'accueil
+│   └── utils/
+│       └── autoloader.php     Chargement automatique des classes
+├── cahier-charges.md          Cahier des charges
+├── compose.yaml               Configuration Docker Compose
+└── README.md                  Ce fichier
 ```
 
-Ceci va démarrer les services suivants dans des conteneurs Docker :
+Seul le dossier `src/public` est accessible depuis le navigateur. Les autres
+dossiers (configuration, classes, scripts SQL) ne sont pas publics.
 
-- Apache (port 8080) : Serveur web pour exécuter les fichiers PHP.
-- MariaDB (port 3306) : Base de données relationnelle.
-- phpMyAdmin (port 9090) : Interface web pour gérer la base de données MariaDB.
-- Mailpit (ports 1025 et 8025) : Serveur SMTP pour tester l'envoi d'e-mails.
+## Lancer le projet en local
 
-## Se connecter à la base de données MariaDB avec phpMyAdmin
+### Prérequis
 
-La configuration Docker Compose inclut également phpMyAdmin, un outil web pour
-gérer les bases de données MariaDB.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Visual Studio Code](https://code.visualstudio.com/) avec l'extension
+  [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-Pour accéder à phpMyAdmin, ouvrez votre navigateur et rendez-vous à l'adresse
-suivante : <http://localhost:9090>.
+### Étapes
 
-Vous pourrez alors vous connecter à la base de données en utilisant les
-identifiants décrits dans le fichier `compose.yaml` (par défaut, l'utilisateur
-est `username` et le mot de passe est `password`).
+1. Cloner le dépôt et ouvrir le dossier du projet (celui qui contient ce
+   fichier) dans Visual Studio Code, puis accepter d'ouvrir le projet dans le
+   conteneur de développement.
+2. Créer le fichier de configuration en copiant le modèle :
 
-## Exécuter des requêtes SQL sur la base de données MariaDB
+   ```bash
+   cp src/config/database.ini.example src/config/database.ini
+   ```
 
-Une fois connecté à la base de données MariaDB via phpMyAdmin, vous pouvez
-exécuter des requêtes SQL pour créer des tables, insérer des données ou
-effectuer d'autres opérations sur la base de données.
+   Les valeurs par défaut correspondent à la base de données Docker et n'ont
+   pas besoin d'être modifiées. Ce fichier est ignoré par Git.
 
-1. Ouvrez/créez un fichier SQL dans Visual Studio Code (par exemple,
-   `script.sql`).
-2. Écrivez votre requête SQL dans ce fichier (par exemple, une requête pour
-   créer une table ou insérer des données).
-3. Dans l'onglet "SQL" de phpMyAdmin, vous pouvez copier et coller votre requête
-   SQL depuis le fichier `script.sql` et l'exécuter pour appliquer les
-   modifications à la base de données.
+3. Démarrer les services Docker :
 
-## Voir les données de la table `my_table`
+   ```bash
+   docker compose up -d
+   ```
 
-Une fois le ou les scripts SQL exécutés, vous pouvez vérifier que les données
-ont été correctement insérées dans la table `my_table` dans le menu latéral
-gauche de phpMyAdmin. Cliquez sur le nom de la base de données, puis sur le nom
-de la table pour voir les données.
+4. Ouvrir phpMyAdmin sur <http://localhost:9090> (utilisateur `username`, mot
+   de passe `password`), sélectionner la base `my_database`, puis exécuter dans
+   l'onglet SQL :
+   1. le script `src/db/script.sql` (création des tables) ;
+   2. le script `src/db/donnees-test.sql` (données de test, facultatif).
+5. Ouvrir le site sur <http://localhost:8080/src/public/>.
 
-## Exécuter vos scripts PHP
+Les e-mails envoyés par l'application en local peuvent être consultés avec
+Mailpit sur <http://localhost:8025>.
 
-La configuration Docker Compose inclut un serveur web Apache avec PHP, ce qui
-vous permet d'exécuter vos scripts PHP directement dans le conteneur.
-
-Le serveur sera accessible à l'adresse <http://localhost:8080> dans votre
-navigateur.
-
-La liste des fichiers PHP disponibles sera affichée, et vous pourrez cliquer sur
-un fichier pour l'exécuter.
-
-Les scripts PHP peuvent se connecter à la base de données MariaDB en utilisant
-le nom d'hôte `mariadb` et les identifiants définis dans le fichier
-`compose.yaml`.
-
-En accédant à l'adresse <http://localhost:8080/public/index.php>, vous pourrez
-exécuter le script PHP principal du projet.
-
-La page d'accueil de démonstration affiche un message de bienvenue et utilise la
-base de données MariaDB pour afficher les données de la table `my_table`.
-
-## Visualiser les e-mails envoyés par votre application PHP
-
-Le serveur SMTP Mailpit est inclus dans la configuration Docker Compose pour
-vous permettre de tester l'envoi d'e-mails depuis votre application PHP.
-
-Pour accéder à l'interface web de Mailpit, ouvrez votre navigateur et
-rendez-vous à l'adresse suivante : <http://localhost:8025>.
-
-Vous y verrez la liste des e-mails envoyés par votre application PHP, ainsi que
-leur contenu et les détails de l'envoi.
-
-Si vous fermez/redémarrez Mailpit, les e-mails précédemment envoyés seront
-perdus, car ils ne sont pas stockés de manière persistante.
-
-## Arrêter les services Docker
-
-Si vous avez exécuté la commande `docker compose up` pour démarrer les services
-Docker, vous pouvez les arrêter avec le raccourci clavier
-<kbd>Ctrl</kbd>+<kbd>C</kbd> dans le terminal où la commande a été exécutée.
-Cela arrêtera les services et libérera les ressources utilisées par les
-conteneurs Docker.
-
-Sinon, vous pouvez également arrêter les services Docker en ouvrant un terminal
-intégré dans Visual Studio Code et en exécutant la commande suivante :
+Pour arrêter les services :
 
 ```bash
-# Arrête tous les services définis dans le fichier compose.yaml
 docker compose down
 ```
 
-Lorsque vous fermez Visual Studio Code, les conteneurs Docker seront
-automatiquement arrêtés. Dès que vous rouvrez Visual Studio Code et que vous
-exécutez à nouveau la commande `docker compose up`, les services Docker seront
-redémarrés.
-
-## Déploiement
-
-L'application est en ligne à l'adresse suivante : https://progserv2.amelontour.ch
-
-### Développement local
-
-1. Copier le fichier `src/config/database.ini.example` et le renommer en
-   `src/config/database.ini` (les valeurs par défaut fonctionnent avec Docker).
-2. Démarrer les services avec `docker compose up`.
-3. Ouvrir phpMyAdmin sur <http://localhost:9090>, sélectionner la base
-   `my_database` et exécuter le script `src/db/script.sql` dans l'onglet SQL.
-4. Ouvrir le site sur <http://localhost:8080/src/public/>.
-
-### Production (Infomaniak)
+## Déployer le projet sur Infomaniak
 
 1. Dans le Manager Infomaniak, créer une base de données MariaDB et un
    utilisateur avec les droits de lecture, d'écriture et d'administration.
-2. Ouvrir le phpMyAdmin d'Infomaniak, sélectionner la base et exécuter le script
-   `src/db/script.sql`, en remplaçant d'abord la ligne `USE my_database;` par le
-   nom de la base Infomaniak.
-3. Ajouter un site PHP sur l'hébergement et définir `src/public` comme
-   répertoire racine (onglet « Général » des paramètres avancés).
-4. Téléverser le dossier `src` sur le serveur avec un client SFTP (FileZilla).
-5. Sur le serveur, modifier `src/config/database.ini` avec les informations de
-   connexion d'Infomaniak.
-6. Ouvrir l'adresse du site et vérifier que la liste des catégories s'affiche.
+   Noter l'hôte, le nom de la base, l'utilisateur et le mot de passe.
+2. Ouvrir le phpMyAdmin d'Infomaniak, sélectionner la base et exécuter le
+   script `src/db/script.sql`, en remplaçant d'abord la ligne
+   `USE my_database;` par le nom de la base Infomaniak.
+3. Ajouter un site PHP sur l'hébergement, choisir la dernière version de PHP
+   (onglet « PHP | Apache ») et définir `src/public` comme répertoire racine
+   (onglet « Général » des paramètres avancés).
+4. Téléverser le dossier `src` dans le dossier du site avec un client SFTP
+   (par exemple [FileZilla](https://filezilla-project.org/)).
+5. Sur le serveur, modifier le fichier `src/config/database.ini` avec les
+   informations de connexion d'Infomaniak.
+6. Ouvrir l'adresse du site et vérifier que la page d'accueil s'affiche avec les
+   catégories.
+
+> [!WARNING]
+>
+> Lors des mises à jour suivantes, ne pas renvoyer le fichier
+> `src/config/database.ini` local sur le serveur : il écraserait les
+> identifiants d'Infomaniak.
+
+## Organisation du travail
+
+Le travail est organisé avec GitHub :
+
+- chaque tâche fait l'objet d'une **issue** ;
+- chaque issue est réalisée sur une **branche** dédiée ;
+- le travail est intégré à `main` par une **pull request**, relue et approuvée
+  par l'autre membre du groupe ;
+- la branche `main` est protégée : une approbation est obligatoire avant toute
+  fusion.
+
+## Utilisation de l'IA
+
+| Date | Outil | Utilisation | Pourquoi |
+| ---- | ----- | ----------- | -------- |
+| 11.10.2026 | Claude | Aide à la mise en place du fichier de configuration et au déploiement sur Infomaniak | Suivre pas à pas les étapes des cours ProgServ1 et ProgServ2 |
+| 14.10.2026 | Claude | Rédaction des données de test et des requêtes SQL de vérification | Tester la base et les requêtes avant de coder en PHP |
+| 14.10.2026 | Claude | Aide à la création de la classe `Database` et de l'autoloader, d'après la solution de l'exercice 1 du chapitre 04 du cours | Appliquer la programmation orientée objet à notre projet |
+| 14.10.2026 | Claude | Restructuration du README | Présenter le projet et documenter son installation |
+
+Le code généré ou proposé par l'IA a été relu, compris et testé par l'équipe
+avant d'être intégré au projet.
+
+## Conclusion
+
+_À compléter en fin de projet : bilan, difficultés rencontrées et solutions
+apportées._
