@@ -1,27 +1,13 @@
 <?php
-const DATABASE_CONFIGURATION_FILE = __DIR__ . '/../config/database.ini';
+require __DIR__ . '/../utils/autoloader.php';
 
-// Lecture du fichier de configuration
-// Documentation : https://www.php.net/manual/fr/function.parse-ini-file.php
-$config = parse_ini_file(DATABASE_CONFIGURATION_FILE, true);
-
-if (!$config) {
-    throw new Exception("Erreur lors de la lecture du fichier de configuration : " . DATABASE_CONFIGURATION_FILE);
-}
-
-$host = $config['host'];
-$port = $config['port'];
-$database = $config['database'];
-$username = $config['username'];
-$password = $config['password'];
-
-// Connexion à la base de données
-$pdo = new PDO("mysql:host=$host;port=$port;dbname=$database;charset=utf8mb4", $username, $password);
+// Création d'une instance de Database (connexion à la base de données)
+$database = new Database();
 
 // Récupération de toutes les catégories
 $sql = "SELECT * FROM categorie";
 
-$stmt = $pdo->prepare($sql);
+$stmt = $database->getPdo()->prepare($sql);
 
 $stmt->execute();
 
