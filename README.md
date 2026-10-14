@@ -204,3 +204,30 @@ Lorsque vous fermez Visual Studio Code, les conteneurs Docker seront
 automatiquement arrêtés. Dès que vous rouvrez Visual Studio Code et que vous
 exécutez à nouveau la commande `docker compose up`, les services Docker seront
 redémarrés.
+
+## Déploiement
+
+L'application est en ligne à l'adresse suivante : https://progserv2.amelontour.ch
+
+### Développement local
+
+1. Copier le fichier `src/config/database.ini.example` et le renommer en
+   `src/config/database.ini` (les valeurs par défaut fonctionnent avec Docker).
+2. Démarrer les services avec `docker compose up`.
+3. Ouvrir phpMyAdmin sur <http://localhost:9090>, sélectionner la base
+   `my_database` et exécuter le script `src/db/script.sql` dans l'onglet SQL.
+4. Ouvrir le site sur <http://localhost:8080/src/public/>.
+
+### Production (Infomaniak)
+
+1. Dans le Manager Infomaniak, créer une base de données MariaDB et un
+   utilisateur avec les droits de lecture, d'écriture et d'administration.
+2. Ouvrir le phpMyAdmin d'Infomaniak, sélectionner la base et exécuter le script
+   `src/db/script.sql`, en remplaçant d'abord la ligne `USE my_database;` par le
+   nom de la base Infomaniak.
+3. Ajouter un site PHP sur l'hébergement et définir `src/public` comme
+   répertoire racine (onglet « Général » des paramètres avancés).
+4. Téléverser le dossier `src` sur le serveur avec un client SFTP (FileZilla).
+5. Sur le serveur, modifier `src/config/database.ini` avec les informations de
+   connexion d'Infomaniak.
+6. Ouvrir l'adresse du site et vérifier que la liste des catégories s'affiche.
