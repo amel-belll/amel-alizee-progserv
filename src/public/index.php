@@ -20,11 +20,14 @@ $categories = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nom du site à définir</title>
+    <title>Zoomy</title>
 </head>
 
 <body>
-    <h1>Nom du site à définir</h1>
+    <h1>Zoomy</h1>
+    <nav>
+        <a href="articles/">Articles</a>
+    </nav>
 
     <p>Le site est en ligne et connecté à la base de données.</p>
 
