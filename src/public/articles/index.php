@@ -3,6 +3,9 @@ require __DIR__ . '/../../utils/autoloader.php';
 
 use Articles\ArticlesManager;
 
+$title = 'Articles | Zoomy';
+$racine = '../';
+
 // Création d'une instance de ArticlesManager
 $articlesManager = new ArticlesManager();
 
@@ -13,13 +16,11 @@ $articles = $articlesManager->getArticles();
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articles | Nom du site à définir</title>
-</head>
+<?php require __DIR__ . '/../../components/head.php'; ?>
 
 <body>
+    <?php require __DIR__ . '/../../components/header.php'; ?>
+
     <h1>Articles</h1>
 
     <p><a href="../index.php">Accueil</a> > Articles</p>
@@ -35,9 +36,7 @@ $articles = $articlesManager->getArticles();
         </article>
     <?php } ?>
 
-    <footer>
-        <p>Projet réalisé dans le cadre du cours ProgServ2 à la HEIG-VD.</p>
-    </footer>
+    <?php require __DIR__ . '/../../components/footer.php'; ?>
 </body>
 
 </html>
