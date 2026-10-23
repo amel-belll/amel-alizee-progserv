@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/../utils/autoloader.php';
 
+$title = 'Accueil | Zoomy';
+$racine = './';
+
 // Création d'une instance de Database (connexion à la base de données)
 $database = new Database();
 
@@ -17,17 +20,12 @@ $categories = $stmt->fetchAll();
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoomy</title>
-</head>
+<?php require __DIR__ . '/../components/head.php'; ?>
 
 <body>
+    <?php require __DIR__ . '/../components/header.php'; ?>
+
     <h1>Zoomy</h1>
-    <nav>
-        <a href="articles/">Articles</a>
-    </nav>
 
     <p>Le site est en ligne et connecté à la base de données.</p>
 
@@ -39,9 +37,7 @@ $categories = $stmt->fetchAll();
         <?php } ?>
     </ul>
 
-    <footer>
-        <p>Projet réalisé dans le cadre du cours ProgServ2 à la HEIG-VD.</p>
-    </footer>
+    <?php require __DIR__ . '/../components/footer.php'; ?>
 </body>
 
 </html>

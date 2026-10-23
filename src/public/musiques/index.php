@@ -1,7 +1,10 @@
 <?php
 require __DIR__ . '/../../utils/autoloader.php';
-// Ce que je n’ai pas mis : la pochette. La colonne existe dans la base et getPochette() aussi, mais je ne sais pas encore où seront stockées les images. On pourra l’ajouter quand ce sera décidé avec Amel.
+
 use Musiques\MusiquesManager;
+
+$title = 'Musiques | Zoomy';
+$racine = '../';
 
 // Création d'une instance de MusiquesManager
 $musiquesManager = new MusiquesManager();
@@ -13,13 +16,11 @@ $musiques = $musiquesManager->getMusiques();
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musiques | Nom du site à définir</title>
-</head>
+<?php require __DIR__ . '/../../components/head.php'; ?>
 
 <body>
+    <?php require __DIR__ . '/../../components/header.php'; ?>
+
     <h1>Musiques du moment</h1>
 
     <p><a href="../index.php">Accueil</a> > Musiques</p>
@@ -43,9 +44,7 @@ $musiques = $musiquesManager->getMusiques();
         </article>
     <?php } ?>
 
-    <footer>
-        <p>Projet réalisé dans le cadre du cours ProgServ2 à la HEIG-VD.</p>
-    </footer>
+    <?php require __DIR__ . '/../../components/footer.php'; ?>
 </body>
 
 </html>
