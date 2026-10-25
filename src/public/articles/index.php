@@ -27,7 +27,11 @@ $articles = $articlesManager->getArticles();
 
     <?php foreach ($articles as $article) { ?>
         <article>
-            <h2><?= htmlspecialchars($article->getTitre()) ?></h2>
+            <h2>
+                <a href="article.php?id=<?= htmlspecialchars($article->getId()) ?>">
+                    <?= htmlspecialchars($article->getTitre()) ?>
+                </a>
+            </h2>
             <p>
                 <?= htmlspecialchars($article->getCategorie()) ?>
                 · <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
