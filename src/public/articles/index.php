@@ -5,6 +5,7 @@ use Articles\ArticlesManager;
 
 $title = 'Articles | Zoomy';
 $racine = '../';
+$page = 'articles';
 
 // Liste des catégories autorisées pour le filtre
 const CATEGORIES = ['Mode', 'Voyages', 'Design'];
@@ -36,35 +37,48 @@ if ($categorieChoisie !== null) {
 <body>
     <?php require __DIR__ . '/../../components/header.php'; ?>
 
-    <h1>Articles</h1>
+    <main>
+        <section class="aero-window">
+            <div class="aero-titlebar">
+                <span class="titre">Articles</span>
+                <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
+            </div>
 
-    <p><a href="../index.php">Accueil</a> > Articles</p>
+            <div class="fenetre-corps">
+                <!-- Filtres : le bouton de la catégorie choisie est bleu, les autres sont clairs -->
+                <div class="filtres">
+                    <a href="index.php" class="gel-btn sm <?= $categorieChoisie === null ? '' : 'ghost' ?>">Tous</a>
+                    <?php foreach (CATEGORIES as $categorie) { ?>
+                        <a href="index.php?categorie=<?= htmlspecialchars($categorie) ?>" class="gel-btn sm <?= $categorieChoisie === $categorie ? '' : 'ghost' ?>"><?= htmlspecialchars($categorie) ?></a>
+                    <?php } ?>
+                </div>
 
-    <nav>
-        <a href="index.php">Tous</a>
-        <?php foreach (CATEGORIES as $categorie) { ?>
-            <a href="index.php?categorie=<?= htmlspecialchars($categorie) ?>"><?= htmlspecialchars($categorie) ?></a>
-        <?php } ?>
-    </nav>
+                <?php if (empty($articles)) { ?>
+                    <p class="message">Aucun article dans cette catégorie pour le moment.</p>
+                <?php } ?>
 
-    <?php if (empty($articles)) { ?>
-        <p>Aucun article dans cette catégorie pour le moment.</p>
-    <?php } ?>
-
-    <?php foreach ($articles as $article) { ?>
-        <article>
-            <h2>
-                <a href="article.php?id=<?= htmlspecialchars($article->getId()) ?>">
-                    <?= htmlspecialchars($article->getTitre()) ?>
-                </a>
-            </h2>
-            <p>
-                <?= htmlspecialchars($article->getCategorie()) ?>
-                · <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
-            </p>
-            <p><?= htmlspecialchars($article->getContenu()) ?></p>
-        </article>
-    <?php } ?>
+                <!-- Grille de cartes -->
+                <div class="grille">
+                    <?php foreach ($articles as $article) { ?>
+                        <a href="article.php?id=<?= htmlspecialchars($article->getId()) ?>" class="carte">
+                            <div class="carte-image">
+                                <?php if ($article->getImageCouverture() !== null) { ?>
+                                    <img src="../images/articles/<?= htmlspecialchars($article->getImageCouverture()) ?>" alt="<?= htmlspecialchars($article->getTitre()) ?>">
+                                <?php } ?>
+                            </div>
+                            <div class="carte-corps">
+                                <div class="carte-infos">
+                                    <span class="chip"><?= htmlspecialchars($article->getCategorie()) ?></span>
+                                    <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
+                                </div>
+                                <h3><?= htmlspecialchars($article->getTitre()) ?></h3>
+                            </div>
+                        </a>
+                    <?php } ?>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <?php require __DIR__ . '/../../components/footer.php'; ?>
 </body>

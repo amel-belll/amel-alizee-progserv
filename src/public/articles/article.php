@@ -4,6 +4,7 @@ require __DIR__ . '/../../utils/autoloader.php';
 use Articles\ArticlesManager;
 
 $racine = '../';
+$page = 'articles';
 
 // Création d'une instance de ArticlesManager
 $articlesManager = new ArticlesManager();
@@ -36,24 +37,42 @@ if ($article !== null) {
 <body>
     <?php require __DIR__ . '/../../components/header.php'; ?>
 
-    <p><a href="../index.php">Accueil</a> > <a href="index.php">Articles</a></p>
+    <main>
+        <section class="aero-window article-detail">
+            <div class="aero-titlebar">
+                <span class="titre"><?= $article !== null ? htmlspecialchars($article->getTitre()) : 'Article introuvable' ?></span>
+                <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
+            </div>
 
-    <?php if ($article !== null) { ?>
-        <article>
-            <h1><?= htmlspecialchars($article->getTitre()) ?></h1>
-            <p>
-                <?= htmlspecialchars($article->getCategorie()) ?>
-                · <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
-                · par <?= htmlspecialchars($article->getAuteur()) ?>
-            </p>
-            <p><?= htmlspecialchars($article->getContenu()) ?></p>
-        </article>
-    <?php } else { ?>
-        <h1>Article introuvable</h1>
-        <p>Cet article n'existe pas ou a été supprimé.</p>
-    <?php } ?>
+            <?php if ($article !== null) { ?>
+                <?php if ($article->getImageCouverture() !== null) { ?>
+                    <img src="../images/articles/<?= htmlspecialchars($article->getImageCouverture()) ?>" alt="<?= htmlspecialchars($article->getTitre()) ?>" class="grande-image">
+                <?php } ?>
 
-    <p><a href="index.php">← Retour aux articles</a></p>
+                <article>
+                    <a href="index.php" class="gel-btn ghost sm">← Retour</a>
+
+                    <p class="infos">
+                        <span class="chip"><?= htmlspecialchars($article->getCategorie()) ?></span>
+                        <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
+                        · par <b><?= htmlspecialchars($article->getAuteur()) ?></b>
+                    </p>
+
+                    <h1><?= htmlspecialchars($article->getTitre()) ?></h1>
+
+                    <div class="contenu">
+                        <p><?= htmlspecialchars($article->getContenu()) ?></p>
+                    </div>
+                </article>
+            <?php } else { ?>
+                <article>
+                    <a href="index.php" class="gel-btn ghost sm">← Retour</a>
+                    <h1>Article introuvable</h1>
+                    <p class="message">Cet article n'existe pas ou a été supprimé.</p>
+                </article>
+            <?php } ?>
+        </section>
+    </main>
 
     <?php require __DIR__ . '/../../components/footer.php'; ?>
 </body>
