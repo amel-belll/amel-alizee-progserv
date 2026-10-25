@@ -959,31 +959,32 @@ a.carte:hover .carte-image img {
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 		width: 11rem;
-	}
-
-	.icones-bienvenue {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1rem;
-		width: 11rem;
 		margin-right: 3rem;
 	}
-	/* Baladeur : l'image, avec le lecteur YouTube posé sur l'écran */
-	.baladeur {
-		position: relative;
-	}
 
-	.baladeur img {
-		width: 100%;
+	.icones-bienvenue img {
+		width: 5rem;
+		height: 5rem;
+		object-fit: contain;
+		filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.15));
 	}
+}
 
-	.ecran-baladeur {
-		position: absolute;
-		left: 8.1%;
-		top: 19.5%;
-		width: 44.2%;
-		height: 60%;
-		border: 0;
-		border-radius: 3px;
-	}
+/* Baladeur : l'image, avec le lecteur YouTube posé sur l'écran */
+.baladeur {
+	position: relative;
+}
+
+.baladeur img {
+	width: 100%;
+}
+
+.ecran-baladeur {
+	position: absolute;
+	left: 8.1%;
+	top: 19.5%;
+	width: 43.7%;
+	height: 60%;
+	border: 0;
+	border-radius: 3px;
 }
