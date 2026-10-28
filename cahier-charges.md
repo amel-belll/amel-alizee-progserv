@@ -1,4 +1,4 @@
-# Cahier des charges – Nom du site à définir
+# Cahier des charges – Zoomy
 
 > Projet réalisé dans le cadre du cours ProgServ2 à la [HEIG-VD], 2026-2027.
 
@@ -8,6 +8,7 @@
 - Alizée de Landerset
 
 ## Lien maquette : https://scuff-global-39594034.figma.site/
+
 ## 2. Présentation
 
 C'est un blog à l'esthétique des années 2000 (Skyblog, MSN, MySpace) qui propose
