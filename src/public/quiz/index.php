@@ -7,11 +7,20 @@ $title = 'Quiz | Zoomy';
 $racine = '../';
 $page = 'quiz';
 
-// Création d'une instance de QuizManager
-$quizManager = new QuizManager();
+// Par défaut : pas d'erreur et aucun quiz
+$erreur = null;
+$quizListe = [];
 
-// Récupération de tous les quiz
-$quizListe = $quizManager->getQuiz();
+try {
+    // Création d'une instance de QuizManager (connexion à la base)
+    $quizManager = new QuizManager();
+
+    // Récupération de tous les quiz
+    $quizListe = $quizManager->getQuiz();
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +39,10 @@ $quizListe = $quizManager->getQuiz();
             </div>
 
             <div class="fenetre-corps">
-                <?php if (empty($quizListe)) { ?>
+                <?php if ($erreur !== null) { ?>
+                    <!-- Message si la base de données ne répond pas -->
+                    <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                <?php } elseif (empty($quizListe)) { ?>
                     <p class="message">Aucun quiz pour le moment.</p>
                 <?php } ?>
 
