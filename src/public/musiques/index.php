@@ -7,11 +7,20 @@ $title = 'Musiques | Zoomy';
 $racine = '../';
 $page = 'musiques';
 
-// Création d'une instance de MusiquesManager
-$musiquesManager = new MusiquesManager();
+// Par défaut : pas d'erreur et aucune musique
+$erreur = null;
+$musiques = [];
 
-// Récupération de toutes les musiques
-$musiques = $musiquesManager->getMusiques();
+try {
+    // Création d'une instance de MusiquesManager (connexion à la base)
+    $musiquesManager = new MusiquesManager();
+
+    // Récupération de toutes les musiques
+    $musiques = $musiquesManager->getMusiques();
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
+}
 
 // Musique affichée dans le lecteur : celle choisie dans l'URL (?id=…), sinon la première
 $musiqueChoisie = null;
@@ -48,7 +57,10 @@ if (isset($_GET["id"])) {
             </div>
 
             <div class="liste-musiques">
-                <?php if (empty($musiques)) { ?>
+                <?php if ($erreur !== null) { ?>
+                    <!-- Message si la base de données ne répond pas -->
+                    <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                <?php } elseif (empty($musiques)) { ?>
                     <p class="message">Aucune musique pour le moment.</p>
                 <?php } ?>
 

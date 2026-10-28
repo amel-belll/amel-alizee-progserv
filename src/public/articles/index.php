@@ -10,9 +10,6 @@ $page = 'articles';
 // Liste des catégories autorisées pour le filtre
 const CATEGORIES = ['Mode', 'Voyages', 'Design'];
 
-// Création d'une instance de ArticlesManager
-$articlesManager = new ArticlesManager();
-
 // Par défaut, aucune catégorie n'est choisie
 $categorieChoisie = null;
 
@@ -21,11 +18,23 @@ if (isset($_GET["categorie"]) && in_array($_GET["categorie"], CATEGORIES)) {
     $categorieChoisie = $_GET["categorie"];
 }
 
-// Récupération des articles : ceux de la catégorie choisie, ou tous les articles
-if ($categorieChoisie !== null) {
-    $articles = $articlesManager->getArticlesParCategorie($categorieChoisie);
-} else {
-    $articles = $articlesManager->getArticles();
+// Par défaut : pas d'erreur et aucun article
+$erreur = null;
+$articles = [];
+
+try {
+    // Création d'une instance de ArticlesManager (connexion à la base)
+    $articlesManager = new ArticlesManager();
+
+    // Récupération des articles : ceux de la catégorie choisie, ou tous les articles
+    if ($categorieChoisie !== null) {
+        $articles = $articlesManager->getArticlesParCategorie($categorieChoisie);
+    } else {
+        $articles = $articlesManager->getArticles();
+    }
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
 }
 ?>
 
@@ -53,7 +62,10 @@ if ($categorieChoisie !== null) {
                     <?php } ?>
                 </div>
 
-                <?php if (empty($articles)) { ?>
+                <?php if ($erreur !== null) { ?>
+                    <!-- Message si la base de données ne répond pas -->
+                    <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                <?php } elseif (empty($articles)) { ?>
                     <p class="message">Aucun article dans cette catégorie pour le moment.</p>
                 <?php } ?>
 

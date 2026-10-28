@@ -6,19 +6,25 @@ use Articles\ArticlesManager;
 $racine = '../';
 $page = 'articles';
 
-// Création d'une instance de ArticlesManager
-$articlesManager = new ArticlesManager();
-
-// Par défaut, aucun article n'est trouvé
+// Par défaut : pas d'erreur et aucun article trouvé
+$erreur = null;
 $article = null;
 
-// Vérification si l'ID de l'article est passé dans l'URL
-if (isset($_GET["id"])) {
-    // Récupération de l'ID de l'article de la superglobale `$_GET`, transformé en nombre entier
-    $articleId = (int) $_GET["id"];
+try {
+    // Création d'une instance de ArticlesManager (connexion à la base)
+    $articlesManager = new ArticlesManager();
 
-    // Récupération de l'article correspondant à l'ID
-    $article = $articlesManager->getArticle($articleId);
+    // Vérification si l'ID de l'article est passé dans l'URL
+    if (isset($_GET["id"])) {
+        // Récupération de l'ID de l'article de la superglobale `$_GET`, transformé en nombre entier
+        $articleId = (int) $_GET["id"];
+
+        // Récupération de l'article correspondant à l'ID
+        $article = $articlesManager->getArticle($articleId);
+    }
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
 }
 
 // Titre de l'onglet du navigateur
@@ -68,7 +74,13 @@ if ($article !== null) {
                 <article>
                     <a href="index.php" class="gel-btn ghost sm">← Retour</a>
                     <h1>Article introuvable</h1>
-                    <p class="message">Cet article n'existe pas ou a été supprimé.</p>
+
+                    <?php if ($erreur !== null) { ?>
+                        <!-- Message si la base de données ne répond pas -->
+                        <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                    <?php } else { ?>
+                        <p class="message">Cet article n'existe pas ou a été supprimé.</p>
+                    <?php } ?>
                 </article>
             <?php } ?>
         </section>

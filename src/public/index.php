@@ -9,28 +9,37 @@ $title = 'Accueil | Zoomy';
 $racine = './';
 $page = 'accueil';
 
-// Création des Managers
-$articlesManager = new ArticlesManager();
-$musiquesManager = new MusiquesManager();
-$quizManager = new QuizManager();
-
-// Récupération des 3 derniers articles
-$derniersArticles = $articlesManager->getDerniersArticles(3);
-
-// Musique à la une : la plus récente (la première de la liste), s'il y en a une
-$musiques = $musiquesManager->getMusiques();
+// Par défaut : pas d'erreur, pas d'articles, pas de musique ni de quiz à la une
+$erreur = null;
+$derniersArticles = [];
 $musiqueUne = null;
-
-if (!empty($musiques)) {
-    $musiqueUne = $musiques[0];
-}
-
-// Quiz à la une : le plus récent, s'il y en a un
-$quizListe = $quizManager->getQuiz();
 $quizUne = null;
 
-if (!empty($quizListe)) {
-    $quizUne = $quizListe[0];
+try {
+    // Création des Managers (connexion à la base)
+    $articlesManager = new ArticlesManager();
+    $musiquesManager = new MusiquesManager();
+    $quizManager = new QuizManager();
+
+    // Récupération des 3 derniers articles
+    $derniersArticles = $articlesManager->getDerniersArticles(3);
+
+    // Musique à la une : la plus récente (la première de la liste), s'il y en a une
+    $musiques = $musiquesManager->getMusiques();
+
+    if (!empty($musiques)) {
+        $musiqueUne = $musiques[0];
+    }
+
+    // Quiz à la une : le plus récent, s'il y en a un
+    $quizListe = $quizManager->getQuiz();
+
+    if (!empty($quizListe)) {
+        $quizUne = $quizListe[0];
+    }
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
 }
 ?>
 
@@ -79,7 +88,9 @@ if (!empty($quizListe)) {
                 </div>
 
                 <div class="fenetre-corps">
-                    <?php if (empty($derniersArticles)) { ?>
+                    <?php if ($erreur !== null) { ?>
+                        <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                    <?php } elseif (empty($derniersArticles)) { ?>
                         <p class="message">Aucun article pour le moment.</p>
                     <?php } ?>
 
