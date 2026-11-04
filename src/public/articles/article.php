@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require __DIR__ . '/../../utils/autoloader.php';
 
 use Articles\ArticlesManager;

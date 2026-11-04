@@ -34,13 +34,22 @@ $racine = $racine ?? './';
             <a href="<?= htmlspecialchars($racine) ?>galerie/" class="nav-pill <?= $page === 'galerie' ? 'active' : '' ?>">Galerie</a>
         </nav>
 
-        <!-- Langue et compte (seront branchés aux séances 8 et 9) -->
+        <!-- Langue et compte -->
         <div class="header-actions">
             <div class="langues">
                 <a href="#" class="active">fr</a>
                 <a href="#">en</a>
             </div>
-            <a href="#" class="gel-btn ghost sm">Connexion</a>
-            <a href="<?= htmlspecialchars($racine) ?>auth/inscription.php" class="gel-btn green sm">Inscription</a>
+
+            <?php if (isset($_SESSION['utilisateur_id'])) { ?>
+                <!-- Connecté·e : on affiche le pseudo et la déconnexion -->
+                <span class="chip"><?= htmlspecialchars($_SESSION['pseudo']) ?></span>
+                <a href="<?= htmlspecialchars($racine) ?>auth/deconnexion.php" class="gel-btn ghost sm">Déconnexion</a>
+            <?php } else { ?>
+                <!-- Pas connecté·e : connexion et inscription -->
+                <a href="<?= htmlspecialchars($racine) ?>auth/connexion.php" class="gel-btn ghost sm">Connexion</a>
+                <a href="<?= htmlspecialchars($racine) ?>auth/inscription.php" class="gel-btn green sm">Inscription</a>
+            <?php } ?>
         </div>
+    </div>
 </header>
