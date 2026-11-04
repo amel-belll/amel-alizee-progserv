@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require __DIR__ . '/../../utils/autoloader.php';
 require_once __DIR__ . '/../../utils/langue.php';
 
@@ -8,11 +10,20 @@ $title = $textes['onglet_galerie'];
 $racine = '../';
 $page = 'galerie';
 
-// Création d'une instance de ImagesManager
-$imagesManager = new ImagesManager();
+// Par défaut : pas d'erreur et aucune image
+$erreur = null;
+$images = [];
 
-// Récupération de toutes les images
-$images = $imagesManager->getImages();
+try {
+    // Création d'une instance de ImagesManager (connexion à la base)
+    $imagesManager = new ImagesManager();
+
+    // Récupération de toutes les images
+    $images = $imagesManager->getImages();
+} catch (Exception $e) {
+    // Si la base ne répond pas, on garde le message pour l'afficher
+    $erreur = $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,8 +42,12 @@ $images = $imagesManager->getImages();
             </div>
 
             <div class="fenetre-corps">
-                <?php if (empty($images)) { ?>
+                <?php if ($erreur !== null) { ?>
+                    <!-- Message si la base de données ne répond pas -->
+                    <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
+                <?php } elseif (empty($images)) { ?>
                     <p class="message"><?= htmlspecialchars($textes['galerie_vide']) ?></p>
+
                 <?php } ?>
 
                 <div class="galerie">

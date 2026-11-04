@@ -41,13 +41,22 @@ $lienEn = '?' . http_build_query($parametres);
             <a href="<?= htmlspecialchars($racine) ?>galerie/" class="nav-pill <?= $page === 'galerie' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_galerie']) ?></a>
         </nav>
 
+        <!-- Langue et compte -->
         <div class="header-actions">
             <div class="langues">
                 <a href="<?= htmlspecialchars($lienFr) ?>" class="<?= $langue === 'fr' ? 'active' : '' ?>">fr</a>
                 <a href="<?= htmlspecialchars($lienEn) ?>" class="<?= $langue === 'en' ? 'active' : '' ?>">en</a>
             </div>
-            <a href="#" class="gel-btn ghost sm"><?= htmlspecialchars($textes['menu_connexion']) ?></a>
-            <a href="#" class="gel-btn green sm"><?= htmlspecialchars($textes['menu_inscription']) ?></a>
+
+            <?php if (isset($_SESSION['utilisateur_id'])) { ?>
+                <!-- Connecté·e : on affiche le pseudo et la déconnexion -->
+                <span class="chip"><?= htmlspecialchars($_SESSION['pseudo']) ?></span>
+                <a href="<?= htmlspecialchars($racine) ?>auth/deconnexion.php" class="gel-btn ghost sm"><?= htmlspecialchars($textes['menu_deconnexion']) ?></a>
+            <?php } else { ?>
+                <!-- Pas connecté·e : connexion et inscription -->
+                <a href="<?= htmlspecialchars($racine) ?>auth/connexion.php" class="gel-btn ghost sm"><?= htmlspecialchars($textes['menu_connexion']) ?></a>
+                <a href="<?= htmlspecialchars($racine) ?>auth/inscription.php" class="gel-btn green sm"><?= htmlspecialchars($textes['menu_inscription']) ?></a>
+            <?php } ?>
         </div>
     </div>
 </header>

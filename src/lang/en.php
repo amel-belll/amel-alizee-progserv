@@ -60,4 +60,44 @@ return [
     'quiz_titre' => 'Quizzes',
     'quiz_vide' => 'No quizzes yet.',
     'quiz_faire' => 'Take the quiz',
+
+    'menu_deconnexion' => 'Log out',
+
+    // Log in
+
+    'onglet_connexion' => 'Log in | Zoomy',
+
+    'connexion_titre' => 'Log in',
+
+    'connexion_h1' => 'Log in',
+
+    'champ_email' => 'E-mail',
+
+    'champ_mot_de_passe' => 'Password',
+
+    'connexion_bouton' => 'Log in',
+
+    'connexion_pas_compte' => 'No account yet?',
+
+    'connexion_lien_inscription' => 'Sign up',
+
+    'erreur_email_invalide' => 'The e-mail address is not valid.',
+
+    'erreur_mot_de_passe_obligatoire' => 'Password is required.',
+
+    'erreur_connexion' => 'Incorrect e-mail or password.',
+
+    'erreur_generale' => 'An error occurred, please try again later.',
+
+    // Sign up
+    'onglet_inscription' => 'Sign up | Zoomy',
+    'inscription_titre' => 'Sign up',
+    'inscription_h1' => 'Create your account',
+    'champ_pseudo' => 'Username',
+    'inscription_bouton' => 'Sign up',
+    'erreur_pseudo_longueur' => 'The username must be between 3 and 30 characters.',
+    'erreur_mot_de_passe_longueur' => 'The password must be at least 8 characters long.',
+    'erreur_pseudo_utilise' => 'This username is already taken.',
+    'erreur_email_utilise' => 'This e-mail address is already in use.',
+    'inscription_succes' => 'Your account has been created! You can now log in.',
 ];
