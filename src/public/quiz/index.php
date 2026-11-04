@@ -1,9 +1,10 @@
 <?php
 require __DIR__ . '/../../utils/autoloader.php';
+require_once __DIR__ . '/../../utils/langue.php';
 
 use Quiz\QuizManager;
 
-$title = 'Quiz | Zoomy';
+$title = $textes['onglet_quiz']; // ← modifié
 $racine = '../';
 $page = 'quiz';
 
@@ -24,7 +25,7 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>"><!-- ← modifié -->
 
 <?php require __DIR__ . '/../../components/head.php'; ?>
 
@@ -34,7 +35,7 @@ try {
     <main>
         <section class="aero-window">
             <div class="aero-titlebar">
-                <span class="titre">Quiz</span>
+                <span class="titre"><?= htmlspecialchars($textes['quiz_titre']) ?></span><!-- ← modifié -->
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
@@ -43,7 +44,7 @@ try {
                     <!-- Message si la base de données ne répond pas -->
                     <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                 <?php } elseif (empty($quizListe)) { ?>
-                    <p class="message">Aucun quiz pour le moment.</p>
+                    <p class="message"><?= htmlspecialchars($textes['quiz_vide']) ?></p><!-- ← modifié -->
                 <?php } ?>
 
                 <!-- Grille de cartes -->
@@ -62,7 +63,7 @@ try {
                                     <p class="texte-doux"><?= htmlspecialchars($quiz->getDescription()) ?></p>
                                 <?php } ?>
 
-                                <a href="jouer.php?id=<?= htmlspecialchars($quiz->getId()) ?>" class="gel-btn green">Faire le quiz</a>
+                                <a href="jouer.php?id=<?= htmlspecialchars($quiz->getId()) ?>" class="gel-btn green"><?= htmlspecialchars($textes['quiz_faire']) ?></a><!-- ← modifié -->
                             </div>
                         </div>
                     <?php } ?>

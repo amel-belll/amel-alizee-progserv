@@ -1,9 +1,10 @@
 <?php
 require __DIR__ . '/../../utils/autoloader.php';
+require_once __DIR__ . '/../../utils/langue.php';
 
 use Musiques\MusiquesManager;
 
-$title = 'Musiques | Zoomy';
+$title = $textes['onglet_musiques'];
 $racine = '../';
 $page = 'musiques';
 
@@ -41,7 +42,7 @@ if (isset($_GET["id"])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>">
 
 <?php require __DIR__ . '/../../components/head.php'; ?>
 
@@ -52,7 +53,7 @@ if (isset($_GET["id"])) {
         <!-- Colonne de gauche : la liste des musiques -->
         <section class="aero-window">
             <div class="aero-titlebar">
-                <span class="titre">Musiques du moment</span>
+                <span class="titre"><?= htmlspecialchars($textes['musiques_titre']) ?></span>
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
@@ -61,7 +62,7 @@ if (isset($_GET["id"])) {
                     <!-- Message si la base de données ne répond pas -->
                     <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                 <?php } elseif (empty($musiques)) { ?>
-                    <p class="message">Aucune musique pour le moment.</p>
+                    <p class="message"><?= htmlspecialchars($textes['musiques_vide']) ?></p>
                 <?php } ?>
 
                 <?php foreach ($musiques as $musique) { ?>
@@ -80,8 +81,7 @@ if (isset($_GET["id"])) {
                         <?php if ($musique->getGenre() !== null) { ?>
                             <span class="chip"><?= htmlspecialchars($musique->getGenre()) ?></span>
                         <?php } ?>
-
-                        <a href="index.php?id=<?= htmlspecialchars($musique->getId()) ?>" class="gel-btn sm">▶ Écouter</a>
+                        <a href="index.php?id=<?= htmlspecialchars($musique->getId()) ?>" class="gel-btn sm"><?= htmlspecialchars($textes['musiques_ecouter']) ?></a>
                     </div>
                 <?php } ?>
             </div>

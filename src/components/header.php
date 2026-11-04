@@ -3,6 +3,13 @@
 // Chaque page définit $page avant d'inclure ce fichier (par exemple $page = 'articles';).
 $page = $page ?? '';
 $racine = $racine ?? './';
+
+// Liens du sélecteur de langue : on garde les autres paramètres de l'adresse (par exemple ?id=3)
+$parametres = $_GET;
+$parametres['langue'] = 'fr';
+$lienFr = '?' . http_build_query($parametres);
+$parametres['langue'] = 'en';
+$lienEn = '?' . http_build_query($parametres);
 ?>
 
 <?php require __DIR__ . '/backdrop.php'; ?>
@@ -27,21 +34,20 @@ $racine = $racine ?? './';
 
         <!-- Menu principal -->
         <nav class="site-nav">
-            <a href="<?= htmlspecialchars($racine) ?>index.php" class="nav-pill <?= $page === 'accueil' ? 'active' : '' ?>">Accueil</a>
-            <a href="<?= htmlspecialchars($racine) ?>articles/" class="nav-pill <?= $page === 'articles' ? 'active' : '' ?>">Articles</a>
-            <a href="<?= htmlspecialchars($racine) ?>quiz/" class="nav-pill <?= $page === 'quiz' ? 'active' : '' ?>">Quiz</a>
-            <a href="<?= htmlspecialchars($racine) ?>musiques/" class="nav-pill <?= $page === 'musiques' ? 'active' : '' ?>">Musiques</a>
-            <a href="<?= htmlspecialchars($racine) ?>galerie/" class="nav-pill <?= $page === 'galerie' ? 'active' : '' ?>">Galerie</a>
+            <a href="<?= htmlspecialchars($racine) ?>index.php" class="nav-pill <?= $page === 'accueil' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_accueil']) ?></a>
+            <a href="<?= htmlspecialchars($racine) ?>articles/" class="nav-pill <?= $page === 'articles' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_articles']) ?></a>
+            <a href="<?= htmlspecialchars($racine) ?>quiz/" class="nav-pill <?= $page === 'quiz' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_quiz']) ?></a>
+            <a href="<?= htmlspecialchars($racine) ?>musiques/" class="nav-pill <?= $page === 'musiques' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_musiques']) ?></a>
+            <a href="<?= htmlspecialchars($racine) ?>galerie/" class="nav-pill <?= $page === 'galerie' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_galerie']) ?></a>
         </nav>
 
-        <!-- Langue et compte (seront branchés aux séances 8 et 9) -->
         <div class="header-actions">
             <div class="langues">
-                <a href="#" class="active">fr</a>
-                <a href="#">en</a>
+                <a href="<?= htmlspecialchars($lienFr) ?>" class="<?= $langue === 'fr' ? 'active' : '' ?>">fr</a>
+                <a href="<?= htmlspecialchars($lienEn) ?>" class="<?= $langue === 'en' ? 'active' : '' ?>">en</a>
             </div>
-            <a href="#" class="gel-btn ghost sm">Connexion</a>
-            <a href="#" class="gel-btn green sm">Inscription</a>
+            <a href="#" class="gel-btn ghost sm"><?= htmlspecialchars($textes['menu_connexion']) ?></a>
+            <a href="#" class="gel-btn green sm"><?= htmlspecialchars($textes['menu_inscription']) ?></a>
         </div>
     </div>
 </header>

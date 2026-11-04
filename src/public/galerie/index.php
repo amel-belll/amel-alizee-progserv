@@ -1,9 +1,10 @@
 <?php
 require __DIR__ . '/../../utils/autoloader.php';
+require_once __DIR__ . '/../../utils/langue.php';
 
 use Images\ImagesManager;
 
-$title = 'Galerie | Zoomy';
+$title = $textes['onglet_galerie'];
 $racine = '../';
 $page = 'galerie';
 
@@ -15,7 +16,7 @@ $images = $imagesManager->getImages();
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>">
 
 <?php require __DIR__ . '/../../components/head.php'; ?>
 
@@ -25,13 +26,13 @@ $images = $imagesManager->getImages();
     <main>
         <section class="aero-window">
             <div class="aero-titlebar">
-                <span class="titre">Galerie d'images</span>
+                <span class="titre"><?= htmlspecialchars($textes['galerie_titre']) ?></span>
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
             <div class="fenetre-corps">
                 <?php if (empty($images)) { ?>
-                    <p class="message">Aucune image pour le moment.</p>
+                    <p class="message"><?= htmlspecialchars($textes['galerie_vide']) ?></p>
                 <?php } ?>
 
                 <div class="galerie">
