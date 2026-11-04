@@ -39,7 +39,7 @@ class UtilisateursManager {
 
     // Ajoute un nouvel utilisateur (le mot de passe doit déjà être haché)
     public function addUtilisateur(string $pseudo, string $email, string $motDePasseHache): void {
-        $sql = "INSERT INTO utilisateur (pseudo, email, mot_de_passe) VALUES (:pseudo, :email, :mot_de_passe)";
+        $sql = "INSERT INTO utilisateur (pseudo, email, mot_de_passe, date_creation) VALUES (:pseudo, :email, :mot_de_passe, NOW())";
 
         $stmt = $this->database->getPdo()->prepare($sql);
         $stmt->bindValue(':pseudo', $pseudo);
