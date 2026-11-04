@@ -3,6 +3,7 @@
 namespace Utilisateurs;
 
 use Database;
+use Exception;
 
 class UtilisateursManager {
     private Database $database;
@@ -36,6 +37,38 @@ class UtilisateursManager {
 
         return $ligne !== false;
     }
+    // Vérifie les données de l'inscription.
+
+    // Si une donnée est invalide, on lance une exception avec le nom de la clé de traduction.
+
+    public function validerInscription(string $pseudo, string $email, string $motDePasse): void {
+
+        if (strlen($pseudo) < 3 || strlen($pseudo) > 30) {
+
+            throw new Exception('erreur_pseudo_longueur');
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+            throw new Exception('erreur_email_invalide');
+        }
+
+        if (strlen($motDePasse) < 8) {
+
+            throw new Exception('erreur_mot_de_passe_longueur');
+        }
+
+        if ($this->pseudoExiste($pseudo)) {
+
+            throw new Exception('erreur_pseudo_utilise');
+        }
+
+        if ($this->emailExiste($email)) {
+
+            throw new Exception('erreur_email_utilise');
+        }
+    }
+
 
     // Ajoute un nouvel utilisateur (le mot de passe doit déjà être haché)
     public function addUtilisateur(string $pseudo, string $email, string $motDePasseHache): void {
