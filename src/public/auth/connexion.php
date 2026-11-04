@@ -30,55 +30,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $motDePasse = $_POST['mot_de_passe'];
 
-    // Validation côté serveur
+    try {
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $utilisateursManager = new UtilisateursManager();
 
-        $erreurs[] = $textes['erreur_email_invalide'];
-    }
+        // Validation côté serveur : lance une exception si une donnée est invalide
 
-    if (empty($motDePasse)) {
+        $utilisateursManager->validerConnexion($email, $motDePasse);
 
-        $erreurs[] = $textes['erreur_mot_de_passe_obligatoire'];
-    }
+        // On cherche le compte avec cet e-mail
 
-    if (empty($erreurs)) {
+        $utilisateur = $utilisateursManager->getUtilisateurParEmail($email);
 
-        try {
+        // Le compte n'existe pas ou le mot de passe est faux
 
-            $utilisateursManager = new UtilisateursManager();
+        if ($utilisateur === null || !password_verify($motDePasse, $utilisateur->getMotDePasse())) {
 
-            // On cherche le compte avec cet e-mail
+            throw new Exception('erreur_connexion');
+        }
 
-            $utilisateur = $utilisateursManager->getUtilisateurParEmail($email);
+        // Connexion réussie : on garde les infos dans la session
 
-            // On vérifie que le compte existe ET que le mot de passe est correct
+        $_SESSION['utilisateur_id'] = $utilisateur->getId();
 
-            if ($utilisateur !== null && password_verify($motDePasse, $utilisateur->getMotDePasse())) {
+        $_SESSION['pseudo'] = $utilisateur->getPseudo();
 
-                // Connexion réussie : on garde les infos dans la session
+        $_SESSION['role'] = $utilisateur->getRole();
 
-                $_SESSION['utilisateur_id'] = $utilisateur->getId();
+        // Redirection vers l'accueil
 
-                $_SESSION['pseudo'] = $utilisateur->getPseudo();
+        header('Location: ../index.php');
 
-                $_SESSION['role'] = $utilisateur->getRole();
+        exit();
+    } catch (Exception $e) {
 
-                // Redirection vers l'accueil
+        // Le message de l'exception est le nom d'une clé de traduction
 
-                header('Location: ../index.php');
+        $cle = $e->getMessage();
 
-                exit();
-            } else {
+        if (isset($textes[$cle])) {
 
-                $erreurs[] = $textes['erreur_connexion'];
-            }
-        } catch (Exception $e) {
+            $erreurs[] = $textes[$cle];
+        } else {
 
             $erreurs[] = $textes['erreur_generale'];
         }
     }
 }
+
 
 ?>
 

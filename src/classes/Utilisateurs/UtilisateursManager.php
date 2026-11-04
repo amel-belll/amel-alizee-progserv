@@ -68,7 +68,16 @@ class UtilisateursManager {
             throw new Exception('erreur_email_utilise');
         }
     }
+    // Vérifie les données de la connexion
+    public function validerConnexion(string $email, string $motDePasse): void {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('erreur_email_invalide');
+        }
 
+        if (empty($motDePasse)) {
+            throw new Exception('erreur_mot_de_passe_obligatoire');
+        }
+    }
 
     // Ajoute un nouvel utilisateur (le mot de passe doit déjà être haché)
     public function addUtilisateur(string $pseudo, string $email, string $motDePasseHache): void {

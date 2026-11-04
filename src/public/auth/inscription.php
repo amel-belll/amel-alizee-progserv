@@ -26,73 +26,36 @@ $email = '';
 
 // On traite le formulaire seulement s'il a été envoyé
 
+// On traite le formulaire seulement s'il a été envoyé
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Récupération des données du formulaire (trim enlève les espaces au début et à la fin)
-
     $pseudo = trim($_POST['pseudo']);
-
     $email = trim($_POST['email']);
-
     $motDePasse = $_POST['mot_de_passe'];
 
-    // Validation côté serveur
+    try {
+        $utilisateursManager = new UtilisateursManager();
 
-    if (strlen($pseudo) < 3 || strlen($pseudo) > 30) {
+        // Validation côté serveur : lance une exception si une donnée est invalide
+        $utilisateursManager->validerInscription($pseudo, $email, $motDePasse);
 
-        $erreurs[] = $textes['erreur_pseudo_longueur'];
-    }
+        // Tout est bon : on hache le mot de passe et on enregistre
+        $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
+        $utilisateursManager->addUtilisateur($pseudo, $email, $motDePasseHache);
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $succes = $textes['inscription_succes'];
 
-        $erreurs[] = $textes['erreur_email_invalide'];
-    }
+        // On vide les champs du formulaire
+        $pseudo = '';
+        $email = '';
+    } catch (Exception $e) {
+        // Le message de l'exception est le nom d'une clé de traduction
+        $cle = $e->getMessage();
 
-    if (strlen($motDePasse) < 8) {
-
-        $erreurs[] = $textes['erreur_mot_de_passe_longueur'];
-    }
-
-    // Si les données sont correctes, on passe à la base de données
-
-    if (empty($erreurs)) {
-
-        try {
-
-            $utilisateursManager = new UtilisateursManager();
-
-            // Vérification que le pseudo et l'e-mail ne sont pas déjà utilisés
-
-            if ($utilisateursManager->pseudoExiste($pseudo)) {
-
-                $erreurs[] = $textes['erreur_pseudo_utilise'];
-            }
-
-            if ($utilisateursManager->emailExiste($email)) {
-
-                $erreurs[] = $textes['erreur_email_utilise'];
-            }
-
-            // Tout est bon : on hache le mot de passe et on enregistre
-
-            if (empty($erreurs)) {
-
-                $motDePasseHache = password_hash($motDePasse, PASSWORD_DEFAULT);
-
-                $utilisateursManager->addUtilisateur($pseudo, $email, $motDePasseHache);
-
-                $succes = $textes['inscription_succes'];
-
-                // On vide les champs du formulaire
-
-                $pseudo = '';
-
-                $email = '';
-            }
-        } catch (Exception $e) {
-
-            // En cas de problème avec la base, on affiche un message simple (sans détails techniques)
-
+        if (isset($textes[$cle])) {
+            $erreurs[] = $textes[$cle];
+        } else {
+            // Autre problème (par exemple la base de données) : message général
             $erreurs[] = $textes['erreur_generale'];
         }
     }
