@@ -1,4 +1,9 @@
 <?php
+
+/** @var array $textes */
+
+/** @var string $langue */
+
 // Page actuelle, pour mettre le bon lien du menu en surbrillance.
 // Chaque page définit $page avant d'inclure ce fichier (par exemple $page = 'articles';).
 $page = $page ?? '';
