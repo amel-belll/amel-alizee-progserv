@@ -2,6 +2,7 @@
 session_start();
 
 require __DIR__ . '/../../utils/autoloader.php';
+require_once __DIR__ . '/../../utils/langue.php'; // ← ajouté
 
 use Articles\ArticlesManager;
 
@@ -33,12 +34,12 @@ try {
 if ($article !== null) {
     $title = $article->getTitre() . ' | Zoomy';
 } else {
-    $title = 'Article introuvable | Zoomy';
+    $title = $textes['article_introuvable'] . ' | Zoomy'; // ← modifié
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>"><!-- ← modifié -->
 
 <?php require __DIR__ . '/../../components/head.php'; ?>
 
@@ -48,7 +49,7 @@ if ($article !== null) {
     <main>
         <section class="aero-window article-detail">
             <div class="aero-titlebar">
-                <span class="titre"><?= $article !== null ? htmlspecialchars($article->getTitre()) : 'Article introuvable' ?></span>
+                <span class="titre"><?= $article !== null ? htmlspecialchars($article->getTitre()) : htmlspecialchars($textes['article_introuvable']) ?></span><!-- ← modifié -->
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
@@ -58,12 +59,12 @@ if ($article !== null) {
                 <?php } ?>
 
                 <article>
-                    <a href="index.php" class="gel-btn ghost sm">← Retour</a>
+                    <a href="index.php" class="gel-btn ghost sm"><?= htmlspecialchars($textes['article_retour']) ?></a><!-- ← modifié -->
 
                     <p class="infos">
                         <span class="chip"><?= htmlspecialchars($article->getCategorie()) ?></span>
                         <?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?>
-                        · par <b><?= htmlspecialchars($article->getAuteur()) ?></b>
+                        · <?= htmlspecialchars($textes['article_par']) ?> <b><?= htmlspecialchars($article->getAuteur()) ?></b><!-- ← modifié -->
                     </p>
 
                     <h1><?= htmlspecialchars($article->getTitre()) ?></h1>
@@ -74,14 +75,14 @@ if ($article !== null) {
                 </article>
             <?php } else { ?>
                 <article>
-                    <a href="index.php" class="gel-btn ghost sm">← Retour</a>
-                    <h1>Article introuvable</h1>
+                    <a href="index.php" class="gel-btn ghost sm"><?= htmlspecialchars($textes['article_retour']) ?></a><!-- ← modifié -->
+                    <h1><?= htmlspecialchars($textes['article_introuvable']) ?></h1><!-- ← modifié -->
 
                     <?php if ($erreur !== null) { ?>
                         <!-- Message si la base de données ne répond pas -->
                         <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                     <?php } else { ?>
-                        <p class="message">Cet article n'existe pas ou a été supprimé.</p>
+                        <p class="message"><?= htmlspecialchars($textes['article_inexistant']) ?></p><!-- ← modifié -->
                     <?php } ?>
                 </article>
             <?php } ?>

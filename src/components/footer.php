@@ -1,3 +1,3 @@
 <footer class="site-footer">
-    <p>Projet réalisé dans le cadre du cours ProgServ2 à la HEIG-VD</p>
+    <p><?= htmlspecialchars($textes['pied_de_page']) ?></p>
 </footer>

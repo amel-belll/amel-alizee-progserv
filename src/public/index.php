@@ -2,12 +2,13 @@
 session_start();
 
 require __DIR__ . '/../utils/autoloader.php';
+require_once __DIR__ . '/../utils/langue.php';
 
 use Articles\ArticlesManager;
 use Musiques\MusiquesManager;
 use Quiz\QuizManager;
 
-$title = 'Accueil | Zoomy';
+$title = $textes['onglet_accueil'];
 $racine = './';
 $page = 'accueil';
 
@@ -46,7 +47,7 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>">
 
 <?php require __DIR__ . '/../components/head.php'; ?>
 
@@ -57,19 +58,17 @@ try {
         <!-- Fenêtre de bienvenue -->
         <section class="aero-window bienvenue">
             <div class="aero-titlebar">
-                <span class="titre">Bienvenue — Zoomy</span>
+                <span class="titre"><?= htmlspecialchars($textes['accueil_bienvenue_titre']) ?></span>
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
             <div class="fenetre-corps bienvenue-corps">
                 <div>
-                    <p class="chip">Blog communautaire</p>
-                    <h1>Un petit coin de ciel bleu<br><span class="vert">pour partager ton style.</span></h1>
-                    <p class="texte-intro">Articles mode, voyages et design, quiz pour trouver ton aesthetic, musiques du moment et galerie d'images — tout est ici.</p>
-                    <p>
-                        <a href="articles/" class="gel-btn">Lire les articles</a>
-                        <a href="quiz/" class="gel-btn green">Trouver mon aesthetic</a>
-                    </p>
+                    <p class="chip"><?= htmlspecialchars($textes['accueil_chip']) ?></p>
+                    <h1><?= htmlspecialchars($textes['accueil_titre_ligne1']) ?><br><span class="vert"><?= htmlspecialchars($textes['accueil_titre_ligne2']) ?></span></h1>
+                    <p class="texte-intro"><?= htmlspecialchars($textes['accueil_intro']) ?></p>
+                    <a href="articles/" class="gel-btn"><?= htmlspecialchars($textes['accueil_lire_articles']) ?></a>
+                    <a href="quiz/" class="gel-btn green"><?= htmlspecialchars($textes['accueil_trouver_aesthetic']) ?></a>
                 </div>
 
                 <!-- Les 4 icônes décoratives de la maquette -->
@@ -85,7 +84,7 @@ try {
         <div class="colonne-gauche">
             <section class="aero-window">
                 <div class="aero-titlebar">
-                    <span class="titre">Derniers articles</span>
+                    <span class="titre"><?= htmlspecialchars($textes['accueil_derniers_articles']) ?></span>
                     <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
                 </div>
 
@@ -93,7 +92,7 @@ try {
                     <?php if ($erreur !== null) { ?>
                         <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                     <?php } elseif (empty($derniersArticles)) { ?>
-                        <p class="message">Aucun article pour le moment.</p>
+                        <p class="message"><?= htmlspecialchars($textes['accueil_aucun_article']) ?></p>
                     <?php } ?>
 
                     <div class="grille">
@@ -120,7 +119,7 @@ try {
             <?php if ($quizUne !== null) { ?>
                 <section class="aero-window">
                     <div class="aero-titlebar">
-                        <span class="titre">Quiz à la une</span>
+                        <span class="titre"><?= htmlspecialchars($textes['accueil_quiz_une']) ?></span>
                         <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
                     </div>
 
@@ -131,7 +130,7 @@ try {
                             <p class="texte-doux"><?= htmlspecialchars($quizUne->getDescription()) ?></p>
                         <?php } ?>
 
-                        <a href="quiz/jouer.php?id=<?= htmlspecialchars($quizUne->getId()) ?>" class="gel-btn green sm">Faire le quiz</a>
+                        <a href="quiz/jouer.php?id=<?= htmlspecialchars($quizUne->getId()) ?>" class="gel-btn green sm"><?= htmlspecialchars($textes['accueil_faire_quiz']) ?></a>
                     </div>
                 </section>
             <?php } ?>
@@ -142,7 +141,7 @@ try {
             <?php if ($musiqueUne !== null) { ?>
                 <section class="aero-window">
                     <div class="aero-titlebar">
-                        <span class="titre">Musique à la une</span>
+                        <span class="titre"><?= htmlspecialchars($textes['accueil_musique_une']) ?></span>
                         <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
                     </div>
 

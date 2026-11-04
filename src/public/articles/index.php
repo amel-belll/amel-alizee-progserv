@@ -2,10 +2,11 @@
 session_start();
 
 require __DIR__ . '/../../utils/autoloader.php';
+require_once __DIR__ . '/../../utils/langue.php';
 
 use Articles\ArticlesManager;
 
-$title = 'Articles | Zoomy';
+$title = $textes['onglet_articles']; // ← modifié
 $racine = '../';
 $page = 'articles';
 
@@ -41,7 +42,7 @@ try {
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="<?= htmlspecialchars($langue) ?>"><!-- ← modifié -->
 
 <?php require __DIR__ . '/../../components/head.php'; ?>
 
@@ -51,14 +52,14 @@ try {
     <main>
         <section class="aero-window">
             <div class="aero-titlebar">
-                <span class="titre">Articles</span>
+                <span class="titre"><?= htmlspecialchars($textes['articles_titre']) ?></span><!-- ← modifié -->
                 <span class="win-btns" aria-hidden="true"><span class="win-btn">–</span><span class="win-btn">□</span><span class="win-btn close">✕</span></span>
             </div>
 
             <div class="fenetre-corps">
                 <!-- Filtres : le bouton de la catégorie choisie est bleu, les autres sont clairs -->
                 <div class="filtres">
-                    <a href="index.php" class="gel-btn sm <?= $categorieChoisie === null ? '' : 'ghost' ?>">Tous</a>
+                    <a href="index.php" class="gel-btn sm <?= $categorieChoisie === null ? '' : 'ghost' ?>"><?= htmlspecialchars($textes['articles_tous']) ?></a><!-- ← modifié -->
                     <?php foreach (CATEGORIES as $categorie) { ?>
                         <a href="index.php?categorie=<?= htmlspecialchars($categorie) ?>" class="gel-btn sm <?= $categorieChoisie === $categorie ? '' : 'ghost' ?>"><?= htmlspecialchars($categorie) ?></a>
                     <?php } ?>
@@ -68,7 +69,7 @@ try {
                     <!-- Message si la base de données ne répond pas -->
                     <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                 <?php } elseif (empty($articles)) { ?>
-                    <p class="message">Aucun article dans cette catégorie pour le moment.</p>
+                    <p class="message"><?= htmlspecialchars($textes['articles_vide']) ?></p><!-- ← modifié -->
                 <?php } ?>
 
                 <!-- Grille de cartes -->
