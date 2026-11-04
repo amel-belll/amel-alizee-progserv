@@ -47,4 +47,27 @@ class UtilisateursManager {
         $stmt->bindValue(':mot_de_passe', $motDePasseHache);
         $stmt->execute();
     }
+    // Récupère un utilisateur à partir de son e-mail (ou null s'il n'existe pas)
+    public function getUtilisateurParEmail(string $email): ?Utilisateur {
+        $sql = "SELECT * FROM utilisateur WHERE email = :email";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        return new Utilisateur(
+            $ligne['id'],
+            $ligne['pseudo'],
+            $ligne['email'],
+            $ligne['mot_de_passe'],
+            $ligne['role'],
+            (bool) $ligne['est_valide']
+        );
+    }
 }

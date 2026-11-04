@@ -2,6 +2,7 @@
 
 namespace Articles;
 
+//classe qui décrit ce qu'est un article
 class Article {
     // Propriétés privées pour assurer l'encapsulation
     private int $id;
@@ -12,7 +13,7 @@ class Article {
     private string $categorie;
     private string $auteur;
 
-    // Constructeur pour initialiser l'objet
+    // Constructeur pour initialiser l'objet avec new
     public function __construct(int $id, string $titre, string $contenu, ?string $imageCouverture, \DateTime $datePublication, string $categorie, string $auteur) {
         $this->id = $id;
         $this->titre = $titre;

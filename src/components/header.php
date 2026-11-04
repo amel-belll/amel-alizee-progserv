@@ -41,7 +41,6 @@ $racine = $racine ?? './';
                 <a href="#">en</a>
             </div>
             <a href="#" class="gel-btn ghost sm">Connexion</a>
-            <a href="#" class="gel-btn green sm">Inscription</a>
+            <a href="<?= htmlspecialchars($racine) ?>auth/inscription.php" class="gel-btn green sm">Inscription</a>
         </div>
-    </div>
 </header>
