@@ -45,7 +45,7 @@ $lienEn = '?' . http_build_query($parametres);
             <a href="<?= htmlspecialchars($racine) ?>musiques/" class="nav-pill <?= $page === 'musiques' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_musiques']) ?></a>
             <a href="<?= htmlspecialchars($racine) ?>galerie/" class="nav-pill <?= $page === 'galerie' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_galerie']) ?></a>
             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
-                <a href="<?= htmlspecialchars($racine) ?>admin/musiques.php" class="nav-pill <?= $page === 'admin' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_administration']) ?></a>
+                <a href="<?= htmlspecialchars($racine) ?>admin/index.php" class="nav-pill <?= $page === 'admin' ? 'active' : '' ?>"><?= htmlspecialchars($textes['menu_administration']) ?></a>
             <?php } ?>
         </nav>
 

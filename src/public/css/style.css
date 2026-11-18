@@ -1085,3 +1085,75 @@ a.carte:hover .carte-image img {
 .petit {
 	font-size: 0.8rem;
 }
+
+/* ---------- Tableaux de l'administration ---------- */
+.tableau-admin {
+	width: 100%;
+	margin-top: 1rem;
+	border-collapse: separate;
+	border-spacing: 0;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid #a9d8f2;
+	border-radius: 14px;
+	overflow: hidden;
+	box-shadow: 0 10px 24px -12px rgba(10, 70, 120, 0.4);
+}
+
+.tableau-admin th,
+.tableau-admin td {
+	padding: 0.8rem 1.2rem;
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid #d6edf9;
+}
+
+.tableau-admin th {
+	background: linear-gradient(180deg, #f2fbff, #c8ebfb);
+	color: var(--titre);
+	font-size: 0.9rem;
+}
+
+/* Une ligne sur deux légèrement teintée, et survol */
+.tableau-admin tbody tr:nth-child(even) {
+	background: rgba(230, 246, 255, 0.6);
+}
+
+.tableau-admin tbody tr:hover {
+	background: #e3f5ff;
+}
+
+.tableau-admin tbody tr:last-child td {
+	border-bottom: none;
+}
+
+/* La dernière colonne (Actions) prend juste la place nécessaire, à droite */
+.tableau-admin th:last-child,
+.tableau-admin td:last-child {
+	width: 1%;
+	white-space: nowrap;
+	text-align: right;
+}
+
+/* Les boutons Modifier et Supprimer côte à côte */
+.actions-admin {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+}
+
+.actions-admin form {
+	margin: 0;
+}
+
+/* ---------- Accueil de l'administration ---------- */
+.admin-menu {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.admin-menu .gel-btn {
+	padding: 1.2rem;
+	font-size: 1.1rem;
+}

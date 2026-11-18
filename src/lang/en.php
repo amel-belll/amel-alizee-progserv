@@ -125,4 +125,44 @@ return [
     'mes_resultats_titre' => 'My quiz results',
     'mes_resultats_vide' => 'You have not taken any quiz yet.',
     'mes_resultats_faire' => 'Take a quiz',
+
+    // Articles administration
+    'onglet_admin_articles' => 'Articles administration | Zoomy',
+    'admin_articles_titre' => 'Articles administration',
+    'admin_ajouter' => '+ Add',
+    'admin_modifier' => 'Edit',
+    'admin_supprimer' => 'Delete',
+    'admin_col_titre' => 'Title',
+    'admin_col_categorie' => 'Category',
+    'admin_col_date' => 'Date',
+    'admin_col_actions' => 'Actions',
+
+    'admin_confirmer_suppression' => 'Delete this article?',
+    'admin_article_supprime' => 'The article has been deleted.',
+
+    // Article form (administration)
+    'admin_article_ajouter_titre' => 'Add an article',
+    'admin_article_modifier_titre' => 'Edit an article',
+    'admin_retour_liste' => '← Back to the list',
+    'champ_titre' => 'Title',
+    'champ_contenu' => 'Content',
+    'champ_categorie' => 'Category',
+    'champ_image' => 'Cover image (file name, optional)',
+    'champ_image_aide' => 'The file must be in the images/articles/ folder, for example tokyo.jpg',
+    'admin_enregistrer' => 'Save',
+    'admin_article_ajoute' => 'The article has been added.',
+    'admin_article_modifie' => 'The article has been updated.',
+    'admin_article_introuvable' => 'This article does not exist.',
+    'erreur_titre_longueur' => 'The title must be between 3 and 255 characters.',
+    'erreur_contenu_longueur' => 'The content must be at least 10 characters long.',
+    'erreur_categorie_invalide' => 'Choose a valid category.',
+
+    // Administration home
+    'onglet_admin' => 'Administration | Zoomy',
+    'admin_titre' => 'Administration',
+    'admin_intro' => 'Choose what you want to manage:',
+    'admin_lien_articles' => 'Articles',
+    'admin_lien_musiques' => 'Music',
+    'admin_lien_images' => 'Images',
+    'admin_lien_quiz' => 'Quizzes',
 ];

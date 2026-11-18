@@ -113,4 +113,44 @@ return [
     'mes_resultats_titre' => 'Mes résultats de quiz',
     'mes_resultats_vide' => "Tu n'as encore fait aucun quiz.",
     'mes_resultats_faire' => 'Faire un quiz',
+
+    // Administration des articles
+    'onglet_admin_articles' => 'Administration des articles | Zoomy',
+    'admin_articles_titre' => 'Administration des articles',
+    'admin_ajouter' => '+ Ajouter',
+    'admin_modifier' => 'Modifier',
+    'admin_supprimer' => 'Supprimer',
+    'admin_col_titre' => 'Titre',
+    'admin_col_categorie' => 'Catégorie',
+    'admin_col_date' => 'Date',
+    'admin_col_actions' => 'Actions',
+
+    'admin_confirmer_suppression' => 'Supprimer cet article ?',
+    'admin_article_supprime' => "L'article a été supprimé.",
+
+    // Formulaire d'article (administration)
+    'admin_article_ajouter_titre' => 'Ajouter un article',
+    'admin_article_modifier_titre' => 'Modifier un article',
+    'admin_retour_liste' => '← Retour à la liste',
+    'champ_titre' => 'Titre',
+    'champ_contenu' => 'Contenu',
+    'champ_categorie' => 'Catégorie',
+    'champ_image' => 'Image de couverture (nom du fichier, facultatif)',
+    'champ_image_aide' => 'Le fichier doit se trouver dans le dossier images/articles/, par exemple tokyo.jpg',
+    'admin_enregistrer' => 'Enregistrer',
+    'admin_article_ajoute' => "L'article a été ajouté.",
+    'admin_article_modifie' => "L'article a été modifié.",
+    'admin_article_introuvable' => "Cet article n'existe pas.",
+    'erreur_titre_longueur' => 'Le titre doit contenir entre 3 et 255 caractères.',
+    'erreur_contenu_longueur' => 'Le contenu doit contenir au moins 10 caractères.',
+    'erreur_categorie_invalide' => 'Choisis une catégorie valide.',
+
+    // Accueil de l'administration
+    'onglet_admin' => 'Administration | Zoomy',
+    'admin_titre' => 'Administration',
+    'admin_intro' => 'Choisis ce que tu veux gérer :',
+    'admin_lien_articles' => 'Articles',
+    'admin_lien_musiques' => 'Musiques',
+    'admin_lien_images' => 'Images',
+    'admin_lien_quiz' => 'Quiz',
 ];
