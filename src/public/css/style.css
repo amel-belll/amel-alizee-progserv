@@ -988,3 +988,100 @@ a.carte:hover .carte-image img {
 	border: 0;
 	border-radius: 3px;
 }
+
+/* ---------- Passer un quiz ---------- */
+.quiz-jeu {
+	max-width: 42rem;
+	margin: 0 auto;
+}
+
+.quiz-progression-texte {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--ink-soft);
+}
+
+.quiz-barre {
+	height: 1rem;
+	margin-top: 0.5rem;
+	border-radius: 999px;
+	background: #fff;
+	border: 1px solid #7fc8f0;
+	box-shadow: inset 0 2px 3px rgba(20, 90, 140, 0.15);
+	overflow: hidden;
+}
+
+.quiz-barre-remplie {
+	height: 100%;
+	border-radius: 999px;
+	background: linear-gradient(180deg, #d0ff8a, #56c41c 55%, #2c8a0c);
+	transition: width 0.5s;
+}
+
+.quiz-question {
+	margin-top: 1.5rem;
+	font-size: 1.5rem;
+}
+
+.quiz-choix {
+	display: grid;
+	gap: 0.75rem;
+	margin-top: 1rem;
+}
+
+/* Chaque réponse en forme de pilule */
+.choix {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1.25rem;
+	border-radius: 999px;
+	border: 2px solid #fff;
+	background: rgba(255, 255, 255, 0.9);
+	font-weight: 700;
+	cursor: pointer;
+	transition: border-color 0.15s;
+}
+
+.choix:hover {
+	border-color: #7fc8f0;
+}
+
+/* Réponse cochée */
+.choix:has(input:checked) {
+	background: linear-gradient(180deg, #e0f4ff, #9fd8f7);
+	border-color: #22a7e6;
+	box-shadow: 0 3px 8px -2px rgba(0, 80, 140, 0.35);
+}
+
+.choix input {
+	accent-color: #22a7e6;
+	width: 1.1rem;
+	height: 1.1rem;
+}
+
+.quiz-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+}
+
+/* ---------- Résultat d'un quiz ---------- */
+.resultat {
+	text-align: center;
+}
+
+.resultat-image {
+	display: block;
+	width: 100%;
+	max-width: 24rem;
+	margin: 0 auto;
+	border-radius: 14px;
+	box-shadow: 0 14px 36px -10px rgba(10, 70, 120, 0.45);
+}
+
+.petit {
+	font-size: 0.8rem;
+}

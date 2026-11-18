@@ -43,4 +43,112 @@ class QuizManager {
         // Retour de tous les quiz
         return $quizListe;
     }
+    // Récupère un seul quiz à partir de son id (ou null s'il n'existe pas)
+    public function getQuizParId(int $id): ?Quiz {
+        $sql = "SELECT id, titre, description, image
+                FROM quiz
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        return new Quiz(
+            $ligne['id'],
+            $ligne['titre'],
+            $ligne['description'],
+            $ligne['image']
+        );
+    }
+    // Récupère les questions d'un quiz, chacune avec ses réponses
+    public function getQuestions(int $idQuiz): array {
+        // 1. Les questions du quiz, dans l'ordre
+        $sql = "SELECT id, texte
+                FROM question
+                WHERE id_quiz = :id_quiz
+                ORDER BY ordre";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        $lignesQuestions = $stmt->fetchAll();
+
+        // 2. Pour chaque question, on va chercher ses réponses
+        $sqlReponses = "SELECT id, texte, id_aesthetic
+                        FROM reponse
+                        WHERE id_question = :id_question";
+
+        $stmtReponses = $this->database->getPdo()->prepare($sqlReponses);
+
+        $questions = [];
+
+        foreach ($lignesQuestions as $ligneQuestion) {
+            $stmtReponses->bindValue(':id_question', $ligneQuestion['id']);
+            $stmtReponses->execute();
+
+            $lignesReponses = $stmtReponses->fetchAll();
+
+            // Transformation de chaque ligne en objet Reponse
+            $reponses = [];
+
+            foreach ($lignesReponses as $ligneReponse) {
+                $reponses[] = new Reponse(
+                    $ligneReponse['id'],
+                    $ligneReponse['texte'],
+                    $ligneReponse['id_aesthetic']
+                );
+            }
+
+            // Création de la question avec sa liste de réponses
+            $questions[] = new Question(
+                $ligneQuestion['id'],
+                $ligneQuestion['texte'],
+                $reponses
+            );
+        }
+
+        return $questions;
+    }
+    // Récupère un aesthetic à partir de son id (ou null s'il n'existe pas)
+    public function getAesthetic(int $id): ?Aesthetic {
+        $sql = "SELECT id, nom, description, image
+                FROM aesthetic
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        return new Aesthetic(
+            $ligne['id'],
+            $ligne['nom'],
+            $ligne['description'],
+            $ligne['image']
+        );
+    }
+
+    // Enregistre le résultat d'un quiz pour un utilisateur
+    public function addResultat(int $idUtilisateur, int $idQuiz, int $idAesthetic): void {
+        $sql = "INSERT INTO resultat_quiz (date, id_utilisateur, id_quiz, id_aesthetic)
+                VALUES (NOW(), :id_utilisateur, :id_quiz, :id_aesthetic)";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_utilisateur', $idUtilisateur);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->bindValue(':id_aesthetic', $idAesthetic);
+        $stmt->execute();
+    }
 }
