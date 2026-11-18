@@ -61,6 +61,7 @@ try {
 
             <div class="fenetre-corps">
                 <p>
+                    <a href="index.php" class="gel-btn ghost sm"><?= htmlspecialchars($textes['admin_titre']) ?></a>
                     <a href="article-formulaire.php" class="gel-btn green"><?= htmlspecialchars($textes['admin_ajouter']) ?></a>
                 </p>
 

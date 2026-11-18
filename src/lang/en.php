@@ -156,4 +156,13 @@ return [
     'erreur_titre_longueur' => 'The title must be between 3 and 255 characters.',
     'erreur_contenu_longueur' => 'The content must be at least 10 characters long.',
     'erreur_categorie_invalide' => 'Choose a valid category.',
+
+    // Administration home
+    'onglet_admin' => 'Administration | Zoomy',
+    'admin_titre' => 'Administration',
+    'admin_intro' => 'Choose what you want to manage:',
+    'admin_lien_articles' => 'Articles',
+    'admin_lien_musiques' => 'Music',
+    'admin_lien_images' => 'Images',
+    'admin_lien_quiz' => 'Quizzes',
 ];

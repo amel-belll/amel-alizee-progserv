@@ -1144,3 +1144,16 @@ a.carte:hover .carte-image img {
 .actions-admin form {
 	margin: 0;
 }
+
+/* ---------- Accueil de l'administration ---------- */
+.admin-menu {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.admin-menu .gel-btn {
+	padding: 1.2rem;
+	font-size: 1.1rem;
+}
