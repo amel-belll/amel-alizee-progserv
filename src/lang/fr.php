@@ -88,4 +88,6 @@ return [
     'erreur_pseudo_utilise' => 'Ce pseudo est déjà utilisé.',
     'erreur_email_utilise' => 'Cette adresse e-mail est déjà utilisée.',
     'inscription_succes' => 'Ton compte a été créé ! Tu peux maintenant te connecter.',
+
+    'menu_administration' => 'Administration',
 ];

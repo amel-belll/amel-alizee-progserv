@@ -100,4 +100,6 @@ return [
     'erreur_pseudo_utilise' => 'This username is already taken.',
     'erreur_email_utilise' => 'This e-mail address is already in use.',
     'inscription_succes' => 'Your account has been created! You can now log in.',
+
+    'menu_administration' => 'Administration',
 ];
