@@ -119,4 +119,10 @@ return [
     'resultat_connecte_toi' => 'Log in to save your results.',
     'resultat_pas_fini' => 'You have not finished this quiz yet.',
     'resultat_source' => 'Image: @luvleerosalee (Pinterest)',
+
+    // My results
+    'onglet_mes_resultats' => 'My results | Zoomy',
+    'mes_resultats_titre' => 'My quiz results',
+    'mes_resultats_vide' => 'You have not taken any quiz yet.',
+    'mes_resultats_faire' => 'Take a quiz',
 ];
