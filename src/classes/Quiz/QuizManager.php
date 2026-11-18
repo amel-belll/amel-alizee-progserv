@@ -43,4 +43,27 @@ class QuizManager {
         // Retour de tous les quiz
         return $quizListe;
     }
+    // Récupère un seul quiz à partir de son id (ou null s'il n'existe pas)
+    public function getQuizParId(int $id): ?Quiz {
+        $sql = "SELECT id, titre, description, image
+                FROM quiz
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        return new Quiz(
+            $ligne['id'],
+            $ligne['titre'],
+            $ligne['description'],
+            $ligne['image']
+        );
+    }
 }
