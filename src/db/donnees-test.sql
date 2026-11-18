@@ -11,7 +11,7 @@ VALUES ('Le retour du Y2K', 'Les tendances des années 2000 reviennent...', 'y2k
        ('Tokyo en 3 jours', 'Itinéraire pour découvrir Tokyo...', 'tokyo.jpg', NOW(), 2, 1);
 
 -- Le quiz
-INSERT INTO quiz (titre, description) VALUES ('Quel aesthetic es-tu ?', 'Découvre ton style des années 2000');
+INSERT INTO quiz (titre, description, image) VALUES ('Quel aesthetic es-tu ?', 'Découvre ton style des années 2000', 'quiz-aesthetic.jpg');
 
 -- Les 6 aesthetics du quiz
 INSERT INTO aesthetic (id, nom, description, image, id_quiz) VALUES
