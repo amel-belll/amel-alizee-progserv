@@ -116,4 +116,39 @@ class QuizManager {
 
         return $questions;
     }
+    // Récupère un aesthetic à partir de son id (ou null s'il n'existe pas)
+    public function getAesthetic(int $id): ?Aesthetic {
+        $sql = "SELECT id, nom, description, image
+                FROM aesthetic
+                WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        return new Aesthetic(
+            $ligne['id'],
+            $ligne['nom'],
+            $ligne['description'],
+            $ligne['image']
+        );
+    }
+
+    // Enregistre le résultat d'un quiz pour un utilisateur
+    public function addResultat(int $idUtilisateur, int $idQuiz, int $idAesthetic): void {
+        $sql = "INSERT INTO resultat_quiz (date, id_utilisateur, id_quiz, id_aesthetic)
+                VALUES (NOW(), :id_utilisateur, :id_quiz, :id_aesthetic)";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_utilisateur', $idUtilisateur);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->bindValue(':id_aesthetic', $idAesthetic);
+        $stmt->execute();
+    }
 }
