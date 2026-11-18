@@ -125,4 +125,15 @@ return [
     'mes_resultats_titre' => 'My quiz results',
     'mes_resultats_vide' => 'You have not taken any quiz yet.',
     'mes_resultats_faire' => 'Take a quiz',
+
+    // Articles administration
+    'onglet_admin_articles' => 'Articles administration | Zoomy',
+    'admin_articles_titre' => 'Articles administration',
+    'admin_ajouter' => '+ Add',
+    'admin_modifier' => 'Edit',
+    'admin_supprimer' => 'Delete',
+    'admin_col_titre' => 'Title',
+    'admin_col_categorie' => 'Category',
+    'admin_col_date' => 'Date',
+    'admin_col_actions' => 'Actions',
 ];

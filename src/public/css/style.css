@@ -1085,3 +1085,24 @@ a.carte:hover .carte-image img {
 .petit {
 	font-size: 0.8rem;
 }
+
+/* ---------- Tableaux de l'administration ---------- */
+.tableau-admin {
+	width: 100%;
+	border-collapse: collapse;
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 14px;
+	overflow: hidden;
+}
+
+.tableau-admin th,
+.tableau-admin td {
+	padding: 0.7rem 1rem;
+	text-align: left;
+	border-bottom: 1px solid #cfe9f8;
+}
+
+.tableau-admin th {
+	background: linear-gradient(180deg, #e9f8ff, #c8ebfb);
+	color: var(--titre);
+}

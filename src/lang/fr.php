@@ -113,4 +113,15 @@ return [
     'mes_resultats_titre' => 'Mes résultats de quiz',
     'mes_resultats_vide' => "Tu n'as encore fait aucun quiz.",
     'mes_resultats_faire' => 'Faire un quiz',
+
+    // Administration des articles
+    'onglet_admin_articles' => 'Administration des articles | Zoomy',
+    'admin_articles_titre' => 'Administration des articles',
+    'admin_ajouter' => '+ Ajouter',
+    'admin_modifier' => 'Modifier',
+    'admin_supprimer' => 'Supprimer',
+    'admin_col_titre' => 'Titre',
+    'admin_col_categorie' => 'Catégorie',
+    'admin_col_date' => 'Date',
+    'admin_col_actions' => 'Actions',
 ];
