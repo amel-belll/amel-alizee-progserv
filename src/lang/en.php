@@ -102,4 +102,21 @@ return [
     'inscription_succes' => 'Your account has been created! You can now log in.',
 
     'menu_administration' => 'Administration',
+    // Take a quiz
+    'quiz_introuvable' => 'Quiz not found',
+    'quiz_inexistant' => 'This quiz does not exist.',
+    'quiz_retour' => '← Back to quizzes',
+    'quiz_voir_resultat' => 'See my result',
+
+    'quiz_question' => 'Question',
+    'quiz_suivant' => 'Next →',
+
+    // Quiz result
+    'resultat_titre' => 'Your result',
+    'resultat_tu_es' => 'Your aesthetic is…',
+    'resultat_refaire' => 'Take the quiz again',
+    'resultat_enregistre' => 'Your result has been saved to your space.',
+    'resultat_connecte_toi' => 'Log in to save your results.',
+    'resultat_pas_fini' => 'You have not finished this quiz yet.',
+    'resultat_source' => 'Image: @luvleerosalee (Pinterest)',
 ];
