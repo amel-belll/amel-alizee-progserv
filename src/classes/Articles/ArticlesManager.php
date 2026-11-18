@@ -5,6 +5,7 @@ namespace Articles;
 require_once __DIR__ . '/../../utils/autoloader.php';
 
 use Database;
+use Exception;
 
 class ArticlesManager {
     private $database;
@@ -168,6 +169,100 @@ class ArticlesManager {
 
         $stmt = $this->database->getPdo()->prepare($sql);
         $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
+
+    public function getCategories(): array {
+        // Définition de la requête SQL pour récupérer toutes les catégories
+        $sql = "SELECT id, nom FROM categorie ORDER BY id";
+
+        // Préparation et exécution de la requête SQL
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->execute();
+
+        // Retour des catégories (chaque ligne contient 'id' et 'nom')
+        return $stmt->fetchAll();
+    }
+
+    public function getIdCategorie(int $idArticle): int {
+        // Définition de la requête SQL pour récupérer la catégorie d'un article
+        $sql = "SELECT id_categorie FROM article WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $idArticle);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        // Si l'article n'existe pas, on renvoie 0
+        if (!$ligne) {
+            return 0;
+        }
+
+        return $ligne['id_categorie'];
+    }
+
+    // Vérifie les données d'un article.
+    // Si une donnée est invalide, on lance une exception avec le nom de la clé de traduction.
+    public function validerArticle(string $titre, string $contenu, int $idCategorie): void {
+        if (strlen($titre) < 3 || strlen($titre) > 255) {
+            throw new Exception('erreur_titre_longueur');
+        }
+
+        if (strlen($contenu) < 10) {
+            throw new Exception('erreur_contenu_longueur');
+        }
+
+        // La catégorie doit exister dans la table categorie
+        $categorieExiste = false;
+
+        foreach ($this->getCategories() as $categorie) {
+            if ($categorie['id'] === $idCategorie) {
+                $categorieExiste = true;
+            }
+        }
+
+        if (!$categorieExiste) {
+            throw new Exception('erreur_categorie_invalide');
+        }
+    }
+
+    public function addArticle(string $titre, string $contenu, ?string $image, int $idCategorie, int $idAuteur): void {
+        // Définition de la requête SQL pour ajouter un article
+        $sql = "INSERT INTO article (titre, contenu, image_couverture, date_publication, id_categorie, id_auteur)
+                VALUES (:titre, :contenu, :image, NOW(), :id_categorie, :id_auteur)";
+
+        // Préparation de la requête SQL
+        $stmt = $this->database->getPdo()->prepare($sql);
+
+        // Lien avec les paramètres
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':contenu', $contenu);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':id_categorie', $idCategorie);
+        $stmt->bindValue(':id_auteur', $idAuteur);
+
+        // Exécution de la requête SQL
+        $stmt->execute();
+    }
+
+    public function updateArticle(int $id, string $titre, string $contenu, ?string $image, int $idCategorie): void {
+        // Définition de la requête SQL pour modifier un article
+        $sql = "UPDATE article
+                SET titre = :titre, contenu = :contenu, image_couverture = :image, id_categorie = :id_categorie
+                WHERE id = :id";
+
+        // Préparation de la requête SQL
+        $stmt = $this->database->getPdo()->prepare($sql);
+
+        // Lien avec les paramètres
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':contenu', $contenu);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':id_categorie', $idCategorie);
+        $stmt->bindValue(':id', $id);
+
+        // Exécution de la requête SQL
         $stmt->execute();
     }
 }

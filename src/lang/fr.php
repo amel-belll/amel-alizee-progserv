@@ -127,4 +127,21 @@ return [
 
     'admin_confirmer_suppression' => 'Supprimer cet article ?',
     'admin_article_supprime' => "L'article a été supprimé.",
+
+    // Formulaire d'article (administration)
+    'admin_article_ajouter_titre' => 'Ajouter un article',
+    'admin_article_modifier_titre' => 'Modifier un article',
+    'admin_retour_liste' => '← Retour à la liste',
+    'champ_titre' => 'Titre',
+    'champ_contenu' => 'Contenu',
+    'champ_categorie' => 'Catégorie',
+    'champ_image' => 'Image de couverture (nom du fichier, facultatif)',
+    'champ_image_aide' => 'Le fichier doit se trouver dans le dossier images/articles/, par exemple tokyo.jpg',
+    'admin_enregistrer' => 'Enregistrer',
+    'admin_article_ajoute' => "L'article a été ajouté.",
+    'admin_article_modifie' => "L'article a été modifié.",
+    'admin_article_introuvable' => "Cet article n'existe pas.",
+    'erreur_titre_longueur' => 'Le titre doit contenir entre 3 et 255 caractères.',
+    'erreur_contenu_longueur' => 'Le contenu doit contenir au moins 10 caractères.',
+    'erreur_categorie_invalide' => 'Choisis une catégorie valide.',
 ];

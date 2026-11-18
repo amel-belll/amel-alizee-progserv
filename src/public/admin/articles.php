@@ -18,6 +18,15 @@ $erreur = null;
 $succes = null;
 $articles = [];
 
+// Message après un ajout ou une modification (envoyé par article-formulaire.php)
+if (isset($_GET['succes']) && $_GET['succes'] === 'ajoute') {
+    $succes = $textes['admin_article_ajoute'];
+}
+
+if (isset($_GET['succes']) && $_GET['succes'] === 'modifie') {
+    $succes = $textes['admin_article_modifie'];
+}
+
 try {
     $articlesManager = new ArticlesManager();
 
