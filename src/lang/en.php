@@ -100,4 +100,13 @@ return [
     'erreur_pseudo_utilise' => 'This username is already taken.',
     'erreur_email_utilise' => 'This e-mail address is already in use.',
     'inscription_succes' => 'Your account has been created! You can now log in.',
+
+    // Take a quiz
+    'quiz_introuvable' => 'Quiz not found',
+    'quiz_inexistant' => 'This quiz does not exist.',
+    'quiz_retour' => '← Back to quizzes',
+    'quiz_voir_resultat' => 'See my result',
+
+    'quiz_question' => 'Question',
+    'quiz_suivant' => 'Next →',
 ];

@@ -88,4 +88,13 @@ return [
     'erreur_pseudo_utilise' => 'Ce pseudo est déjà utilisé.',
     'erreur_email_utilise' => 'Cette adresse e-mail est déjà utilisée.',
     'inscription_succes' => 'Ton compte a été créé ! Tu peux maintenant te connecter.',
+
+    // Passer un quiz
+    'quiz_introuvable' => 'Quiz introuvable',
+    'quiz_inexistant' => "Ce quiz n'existe pas.",
+    'quiz_retour' => '← Retour aux quiz',
+    'quiz_voir_resultat' => 'Voir mon résultat',
+
+    'quiz_question' => 'Question',
+    'quiz_suivant' => 'Suivant →',
 ];
