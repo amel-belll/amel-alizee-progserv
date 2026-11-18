@@ -32,14 +32,22 @@ try {
 }
 
 // Si on commence un nouveau quiz : on remet la progression à zéro dans la session
-if (!isset($_SESSION['quiz_id']) || $_SESSION['quiz_id'] !== $idQuiz) {
+// Si on commence un nouveau quiz, ou si on clique sur « Refaire » : on remet tout à zéro
+if (!isset($_SESSION['quiz_id']) || $_SESSION['quiz_id'] !== $idQuiz || isset($_GET['recommencer'])) {
     $_SESSION['quiz_id'] = $idQuiz;
     $_SESSION['quiz_position'] = 0;
     $_SESSION['quiz_choix'] = [];
+    unset($_SESSION['quiz_enregistre']);
+    // unset supprime une valeur de la session
 }
 
 $position = $_SESSION['quiz_position'];
 $nombreQuestions = count($questions);
+// Si toutes les questions ont déjà été répondues, on va directement au résultat
+if ($quiz !== null && $nombreQuestions > 0 && $position >= $nombreQuestions) {
+    header('Location: resultat.php?id=' . $idQuiz);
+    exit();
+}
 
 // Le formulaire a été envoyé : on enregistre la réponse choisie
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $quiz !== null && $position < $nombreQuestions) {

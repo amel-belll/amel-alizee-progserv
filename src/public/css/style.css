@@ -1067,3 +1067,21 @@ a.carte:hover .carte-image img {
 	justify-content: flex-end;
 	margin-top: 1.5rem;
 }
+
+/* ---------- Résultat d'un quiz ---------- */
+.resultat {
+	text-align: center;
+}
+
+.resultat-image {
+	display: block;
+	width: 100%;
+	max-width: 24rem;
+	margin: 0 auto;
+	border-radius: 14px;
+	box-shadow: 0 14px 36px -10px rgba(10, 70, 120, 0.45);
+}
+
+.petit {
+	font-size: 0.8rem;
+}

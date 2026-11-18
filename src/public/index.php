@@ -130,7 +130,7 @@ try {
                             <p class="texte-doux"><?= htmlspecialchars($quizUne->getDescription()) ?></p>
                         <?php } ?>
 
-                        <a href="quiz/jouer.php?id=<?= htmlspecialchars($quizUne->getId()) ?>" class="gel-btn green sm"><?= htmlspecialchars($textes['accueil_faire_quiz']) ?></a>
+                        <a href="quiz/jouer.php?id=<?= htmlspecialchars($quizUne->getId()) ?>&recommencer=1" class="gel-btn green sm"><?= htmlspecialchars($textes['accueil_faire_quiz']) ?></a>
                     </div>
                 </section>
             <?php } ?>

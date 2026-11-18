@@ -97,4 +97,13 @@ return [
 
     'quiz_question' => 'Question',
     'quiz_suivant' => 'Suivant →',
+
+    // Résultat d'un quiz
+    'resultat_titre' => 'Ton résultat',
+    'resultat_tu_es' => 'Ton aesthetic est…',
+    'resultat_refaire' => 'Refaire le quiz',
+    'resultat_enregistre' => 'Ton résultat a été enregistré dans ton espace.',
+    'resultat_connecte_toi' => 'Connecte-toi pour enregistrer tes résultats.',
+    'resultat_pas_fini' => "Tu n'as pas encore terminé ce quiz.",
+    'resultat_source' => 'Image : @luvleerosalee (Pinterest)',
 ];

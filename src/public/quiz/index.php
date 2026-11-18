@@ -65,7 +65,7 @@ try {
                                     <p class="texte-doux"><?= htmlspecialchars($quiz->getDescription()) ?></p>
                                 <?php } ?>
 
-                                <a href="jouer.php?id=<?= htmlspecialchars($quiz->getId()) ?>" class="gel-btn green"><?= htmlspecialchars($textes['quiz_faire']) ?></a><!-- ← modifié -->
+                                <a href="jouer.php?id=<?= htmlspecialchars($quiz->getId()) ?>&recommencer=1" class="gel-btn green"><?= htmlspecialchars($textes['quiz_faire']) ?></a><!-- ← modifié -->
                             </div>
                         </div>
                     <?php } ?>

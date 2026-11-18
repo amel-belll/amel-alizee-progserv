@@ -109,4 +109,13 @@ return [
 
     'quiz_question' => 'Question',
     'quiz_suivant' => 'Next →',
+
+    // Quiz result
+    'resultat_titre' => 'Your result',
+    'resultat_tu_es' => 'Your aesthetic is…',
+    'resultat_refaire' => 'Take the quiz again',
+    'resultat_enregistre' => 'Your result has been saved to your space.',
+    'resultat_connecte_toi' => 'Log in to save your results.',
+    'resultat_pas_fini' => 'You have not finished this quiz yet.',
+    'resultat_source' => 'Image: @luvleerosalee (Pinterest)',
 ];
