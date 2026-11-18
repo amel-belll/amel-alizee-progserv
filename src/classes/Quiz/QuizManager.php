@@ -66,4 +66,54 @@ class QuizManager {
             $ligne['image']
         );
     }
+    // Récupère les questions d'un quiz, chacune avec ses réponses
+    public function getQuestions(int $idQuiz): array {
+        // 1. Les questions du quiz, dans l'ordre
+        $sql = "SELECT id, texte
+                FROM question
+                WHERE id_quiz = :id_quiz
+                ORDER BY ordre";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        $lignesQuestions = $stmt->fetchAll();
+
+        // 2. Pour chaque question, on va chercher ses réponses
+        $sqlReponses = "SELECT id, texte, id_aesthetic
+                        FROM reponse
+                        WHERE id_question = :id_question";
+
+        $stmtReponses = $this->database->getPdo()->prepare($sqlReponses);
+
+        $questions = [];
+
+        foreach ($lignesQuestions as $ligneQuestion) {
+            $stmtReponses->bindValue(':id_question', $ligneQuestion['id']);
+            $stmtReponses->execute();
+
+            $lignesReponses = $stmtReponses->fetchAll();
+
+            // Transformation de chaque ligne en objet Reponse
+            $reponses = [];
+
+            foreach ($lignesReponses as $ligneReponse) {
+                $reponses[] = new Reponse(
+                    $ligneReponse['id'],
+                    $ligneReponse['texte'],
+                    $ligneReponse['id_aesthetic']
+                );
+            }
+
+            // Création de la question avec sa liste de réponses
+            $questions[] = new Question(
+                $ligneQuestion['id'],
+                $ligneQuestion['texte'],
+                $reponses
+            );
+        }
+
+        return $questions;
+    }
 }
