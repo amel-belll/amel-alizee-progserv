@@ -15,10 +15,20 @@ $page = 'admin';
 exigerAdmin($racine);
 
 $erreur = null;
+$succes = null;
 $articles = [];
 
 try {
     $articlesManager = new ArticlesManager();
+
+    // Le formulaire « Supprimer » a été envoyé
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_supprimer'])) {
+        $idSupprimer = (int) $_POST['id_supprimer'];
+        $articlesManager->removeArticle($idSupprimer);
+        $succes = $textes['admin_article_supprime'];
+    }
+
+    // Liste des articles (après la suppression éventuelle)
     $articles = $articlesManager->getArticles();
 } catch (Exception $e) {
     $erreur = $textes['erreur_generale'];
@@ -49,6 +59,10 @@ try {
                     <p class="message erreur"><?= htmlspecialchars($erreur) ?></p>
                 <?php } ?>
 
+                <?php if ($succes !== null) { ?>
+                    <p class="message succes"><?= htmlspecialchars($succes) ?></p>
+                <?php } ?>
+
                 <table class="tableau-admin">
                     <thead>
                         <tr>
@@ -65,7 +79,14 @@ try {
                                 <td><span class="chip"><?= htmlspecialchars($article->getCategorie()) ?></span></td>
                                 <td><?= htmlspecialchars($article->getDatePublication()->format('d.m.Y')) ?></td>
                                 <td>
-                                    <a href="article-formulaire.php?id=<?= htmlspecialchars($article->getId()) ?>" class="gel-btn sm ghost"><?= htmlspecialchars($textes['admin_modifier']) ?></a>
+                                    <div class="actions-admin">
+                                        <a href="article-formulaire.php?id=<?= htmlspecialchars($article->getId()) ?>" class="gel-btn sm ghost"><?= htmlspecialchars($textes['admin_modifier']) ?></a>
+
+                                        <form action="articles.php" method="POST" onsubmit="return confirm('<?= htmlspecialchars($textes['admin_confirmer_suppression']) ?>');">
+                                            <input type="hidden" name="id_supprimer" value="<?= htmlspecialchars($article->getId()) ?>">
+                                            <button type="submit" class="gel-btn sm red"><?= htmlspecialchars($textes['admin_supprimer']) ?></button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php } ?>

@@ -136,4 +136,7 @@ return [
     'admin_col_categorie' => 'Category',
     'admin_col_date' => 'Date',
     'admin_col_actions' => 'Actions',
+
+    'admin_confirmer_suppression' => 'Delete this article?',
+    'admin_article_supprime' => 'The article has been deleted.',
 ];

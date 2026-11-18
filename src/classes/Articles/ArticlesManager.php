@@ -162,4 +162,12 @@ class ArticlesManager {
         // Retour des articles
         return $articles;
     }
+    // Supprime un article à partir de son id
+    public function removeArticle(int $id): void {
+        $sql = "DELETE FROM article WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
 }

@@ -124,4 +124,7 @@ return [
     'admin_col_categorie' => 'Catégorie',
     'admin_col_date' => 'Date',
     'admin_col_actions' => 'Actions',
+
+    'admin_confirmer_suppression' => 'Supprimer cet article ?',
+    'admin_article_supprime' => "L'article a été supprimé.",
 ];
