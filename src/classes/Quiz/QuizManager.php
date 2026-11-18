@@ -151,4 +151,35 @@ class QuizManager {
         $stmt->bindValue(':id_aesthetic', $idAesthetic);
         $stmt->execute();
     }
+
+    // Récupère tous les résultats de quiz d'un utilisateur, du plus récent au plus ancien
+    public function getResultatsUtilisateur(int $idUtilisateur): array {
+        $sql = "SELECT r.date, q.id AS id_quiz, q.titre AS titre_quiz,
+                       a.nom AS nom_aesthetic, a.image AS image_aesthetic
+                FROM resultat_quiz r
+                JOIN quiz q ON r.id_quiz = q.id
+                JOIN aesthetic a ON r.id_aesthetic = a.id
+                WHERE r.id_utilisateur = :id_utilisateur
+                ORDER BY r.date DESC";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_utilisateur', $idUtilisateur);
+        $stmt->execute();
+
+        $lignes = $stmt->fetchAll();
+
+        $resultats = [];
+
+        foreach ($lignes as $ligne) {
+            $resultats[] = new ResultatQuiz(
+                new \DateTime($ligne['date']),
+                $ligne['id_quiz'],
+                $ligne['titre_quiz'],
+                $ligne['nom_aesthetic'],
+                $ligne['image_aesthetic']
+            );
+        }
+
+        return $resultats;
+    }
 }

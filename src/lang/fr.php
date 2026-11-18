@@ -107,4 +107,10 @@ return [
     'resultat_connecte_toi' => 'Connecte-toi pour enregistrer tes résultats.',
     'resultat_pas_fini' => "Tu n'as pas encore terminé ce quiz.",
     'resultat_source' => 'Image : @luvleerosalee (Pinterest)',
+
+    // Mes résultats
+    'onglet_mes_resultats' => 'Mes résultats | Zoomy',
+    'mes_resultats_titre' => 'Mes résultats de quiz',
+    'mes_resultats_vide' => "Tu n'as encore fait aucun quiz.",
+    'mes_resultats_faire' => 'Faire un quiz',
 ];
