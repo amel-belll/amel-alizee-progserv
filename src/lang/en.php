@@ -101,6 +101,7 @@ return [
     'erreur_email_utilise' => 'This e-mail address is already in use.',
     'inscription_succes' => 'Your account has been created! You can now log in.',
 
+    'menu_administration' => 'Administration',
     // Take a quiz
     'quiz_introuvable' => 'Quiz not found',
     'quiz_inexistant' => 'This quiz does not exist.',
