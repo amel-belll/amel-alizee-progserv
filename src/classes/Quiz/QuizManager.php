@@ -317,4 +317,130 @@ class QuizManager {
         $stmt->bindValue(':id', $id);
         $stmt->execute();
     }
+
+    // Récupère une question d'un quiz avec ses réponses (ou null si elle n'existe pas)
+    public function getQuestion(int $idQuestion, int $idQuiz): ?Question {
+        $pdo = $this->database->getPdo();
+
+        $stmt = $pdo->prepare("SELECT id, texte FROM question WHERE id = :id AND id_quiz = :id_quiz");
+        $stmt->bindValue(':id', $idQuestion);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        $ligne = $stmt->fetch();
+
+        if ($ligne === false) {
+            return null;
+        }
+
+        // Les réponses de cette question
+        $stmtReponses = $pdo->prepare("SELECT id, texte, id_aesthetic FROM reponse WHERE id_question = :id_question");
+        $stmtReponses->bindValue(':id_question', $idQuestion);
+        $stmtReponses->execute();
+
+        $reponses = [];
+
+        foreach ($stmtReponses->fetchAll() as $ligneReponse) {
+            $reponses[] = new Reponse($ligneReponse['id'], $ligneReponse['texte'], $ligneReponse['id_aesthetic']);
+        }
+
+        return new Question($ligne['id'], $ligne['texte'], $reponses);
+    }
+
+    // Vérifie une question et ses réponses
+    // $reponses est un tableau [id de l'aesthetic => texte de la réponse]
+    public function validerQuestion(string $texte, array $reponses): void {
+        if (strlen($texte) < 3 || strlen($texte) > 255) {
+            throw new Exception('erreur_texte_question');
+        }
+
+        // Il faut au moins 2 réponses remplies
+        $nombreReponses = 0;
+
+        foreach ($reponses as $texteReponse) {
+            if (trim($texteReponse) !== '') {
+                $nombreReponses = $nombreReponses + 1;
+            }
+        }
+
+        if ($nombreReponses < 2) {
+            throw new Exception('erreur_reponses_minimum');
+        }
+    }
+
+    // Enregistre les réponses d'une question (les réponses vides sont ignorées)
+    private function addReponses(int $idQuestion, array $reponses): void {
+        $stmt = $this->database->getPdo()->prepare(
+            "INSERT INTO reponse (texte, id_question, id_aesthetic) VALUES (:texte, :id_question, :id_aesthetic)"
+        );
+
+        foreach ($reponses as $idAesthetic => $texteReponse) {
+            if (trim($texteReponse) !== '') {
+                $stmt->bindValue(':texte', trim($texteReponse));
+                $stmt->bindValue(':id_question', $idQuestion);
+                $stmt->bindValue(':id_aesthetic', (int) $idAesthetic);
+                $stmt->execute();
+            }
+        }
+    }
+
+    // Ajoute une question à la fin d'un quiz, avec ses réponses
+    public function addQuestion(int $idQuiz, string $texte, array $reponses): void {
+        $pdo = $this->database->getPdo();
+
+        // La nouvelle question prend l'ordre suivant (le plus grand + 1)
+        $stmt = $pdo->prepare("SELECT MAX(ordre) AS dernier FROM question WHERE id_quiz = :id_quiz");
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+        $ligne = $stmt->fetch();
+
+        $ordre = 1;
+
+        if ($ligne['dernier'] !== null) {
+            $ordre = $ligne['dernier'] + 1;
+        }
+
+        $stmt = $pdo->prepare("INSERT INTO question (texte, ordre, id_quiz) VALUES (:texte, :ordre, :id_quiz)");
+        $stmt->bindValue(':texte', $texte);
+        $stmt->bindValue(':ordre', $ordre);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        // L'id de la question qui vient d'être créée
+        $idQuestion = (int) $pdo->lastInsertId();
+
+        $this->addReponses($idQuestion, $reponses);
+    }
+
+    // Modifie une question : nouveau texte, et on remplace toutes ses réponses
+    public function updateQuestion(int $idQuestion, int $idQuiz, string $texte, array $reponses): void {
+        $pdo = $this->database->getPdo();
+
+        $stmt = $pdo->prepare("UPDATE question SET texte = :texte WHERE id = :id AND id_quiz = :id_quiz");
+        $stmt->bindValue(':texte', $texte);
+        $stmt->bindValue(':id', $idQuestion);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        // On supprime les anciennes réponses, puis on enregistre les nouvelles
+        $stmt = $pdo->prepare("DELETE FROM reponse WHERE id_question = :id");
+        $stmt->bindValue(':id', $idQuestion);
+        $stmt->execute();
+
+        $this->addReponses($idQuestion, $reponses);
+    }
+
+    // Supprime une question et ses réponses
+    public function removeQuestion(int $idQuestion, int $idQuiz): void {
+        $pdo = $this->database->getPdo();
+
+        $stmt = $pdo->prepare("DELETE FROM reponse WHERE id_question = :id");
+        $stmt->bindValue(':id', $idQuestion);
+        $stmt->execute();
+
+        $stmt = $pdo->prepare("DELETE FROM question WHERE id = :id AND id_quiz = :id_quiz");
+        $stmt->bindValue(':id', $idQuestion);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+    }
 }
