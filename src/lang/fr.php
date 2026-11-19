@@ -153,4 +153,21 @@ return [
     'admin_lien_musiques' => 'Musiques',
     'admin_lien_images' => 'Images',
     'admin_lien_quiz' => 'Quiz',
+
+    // Administration des quiz
+    'onglet_admin_quiz' => 'Administration des quiz | Zoomy',
+    'admin_quiz_titre' => 'Administration des quiz',
+    'admin_col_description' => 'Description',
+    'admin_confirmer_suppression_quiz' => 'Supprimer ce quiz, ses questions, ses aesthetics et ses résultats ?',
+    'admin_quiz_supprime' => 'Le quiz a été supprimé.',
+
+    // Formulaire de quiz (administration)
+    'admin_quiz_ajouter_titre' => 'Ajouter un quiz',
+    'admin_quiz_modifier_titre' => 'Modifier un quiz',
+    'champ_description' => 'Description (facultatif)',
+    'champ_image_quiz' => 'Image (nom du fichier, facultatif)',
+    'champ_image_quiz_aide' => 'Le fichier doit se trouver dans le dossier images/quiz/, par exemple quiz-aesthetic.jpg',
+    'admin_quiz_ajoute' => 'Le quiz a été ajouté.',
+    'admin_quiz_modifie' => 'Le quiz a été modifié.',
+    'admin_quiz_introuvable' => "Ce quiz n'existe pas.",
 ];
