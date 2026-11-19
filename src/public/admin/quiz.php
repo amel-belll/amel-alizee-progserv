@@ -89,6 +89,7 @@ try {
                                 <td>
                                     <div class="actions-admin">
                                         <a href="quiz-formulaire.php?id=<?= htmlspecialchars($quiz->getId()) ?>" class="gel-btn sm ghost"><?= htmlspecialchars($textes['admin_modifier']) ?></a>
+                                        <a href="aesthetics.php?quiz=<?= htmlspecialchars($quiz->getId()) ?>" class="gel-btn sm"><?= htmlspecialchars($textes['admin_bouton_aesthetics']) ?></a>
 
                                         <form action="quiz.php" method="POST" onsubmit="return confirm('<?= htmlspecialchars($textes['admin_confirmer_suppression_quiz']) ?>');">
                                             <input type="hidden" name="id_supprimer" value="<?= htmlspecialchars($quiz->getId()) ?>">
