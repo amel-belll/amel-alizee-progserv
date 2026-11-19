@@ -5,6 +5,7 @@ namespace Quiz;
 require_once __DIR__ . '/../../utils/autoloader.php';
 
 use Database;
+use Exception;
 
 class QuizManager {
     private $database;
@@ -209,6 +210,36 @@ class QuizManager {
 
         // 5. Enfin, le quiz lui-même
         $stmt = $pdo->prepare("DELETE FROM quiz WHERE id = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
+
+    // Vérifie les données d'un quiz (lance une exception avec une clé de traduction)
+    public function validerQuiz(string $titre): void {
+        if (strlen($titre) < 3 || strlen($titre) > 255) {
+            throw new Exception('erreur_titre_longueur');
+        }
+    }
+
+    // Ajoute un nouveau quiz
+    public function addQuiz(string $titre, ?string $description, ?string $image): void {
+        $sql = "INSERT INTO quiz (titre, description, image) VALUES (:titre, :description, :image)";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':image', $image);
+        $stmt->execute();
+    }
+
+    // Modifie un quiz existant
+    public function updateQuiz(int $id, string $titre, ?string $description, ?string $image): void {
+        $sql = "UPDATE quiz SET titre = :titre, description = :description, image = :image WHERE id = :id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':titre', $titre);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':image', $image);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
     }

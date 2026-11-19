@@ -18,6 +18,15 @@ $erreur = null;
 $succes = null;
 $quizListe = [];
 
+// Message après un ajout ou une modification (envoyé par quiz-formulaire.php)
+if (isset($_GET['succes']) && $_GET['succes'] === 'ajoute') {
+    $succes = $textes['admin_quiz_ajoute'];
+}
+
+if (isset($_GET['succes']) && $_GET['succes'] === 'modifie') {
+    $succes = $textes['admin_quiz_modifie'];
+}
+
 try {
     $quizManager = new QuizManager();
 

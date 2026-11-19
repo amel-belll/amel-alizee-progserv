@@ -172,4 +172,14 @@ return [
     'admin_col_description' => 'Description',
     'admin_confirmer_suppression_quiz' => 'Delete this quiz, its questions, aesthetics and results?',
     'admin_quiz_supprime' => 'The quiz has been deleted.',
+
+    // Quiz form (administration)
+    'admin_quiz_ajouter_titre' => 'Add a quiz',
+    'admin_quiz_modifier_titre' => 'Edit a quiz',
+    'champ_description' => 'Description (optional)',
+    'champ_image_quiz' => 'Image (file name, optional)',
+    'champ_image_quiz_aide' => 'The file must be in the images/quiz/ folder, for example quiz-aesthetic.jpg',
+    'admin_quiz_ajoute' => 'The quiz has been added.',
+    'admin_quiz_modifie' => 'The quiz has been updated.',
+    'admin_quiz_introuvable' => 'This quiz does not exist.',
 ];
