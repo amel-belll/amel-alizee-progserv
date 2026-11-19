@@ -243,4 +243,78 @@ class QuizManager {
         $stmt->bindValue(':id', $id);
         $stmt->execute();
     }
+
+    // Récupère tous les aesthetics d'un quiz
+    public function getAesthetics(int $idQuiz): array {
+        $sql = "SELECT id, nom, description, image FROM aesthetic WHERE id_quiz = :id_quiz ORDER BY id";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+
+        $lignes = $stmt->fetchAll();
+
+        $aesthetics = [];
+
+        foreach ($lignes as $ligne) {
+            $aesthetics[] = new Aesthetic(
+                $ligne['id'],
+                $ligne['nom'],
+                $ligne['description'],
+                $ligne['image']
+            );
+        }
+
+        return $aesthetics;
+    }
+
+    // Vérifie le nom d'un aesthetic
+    public function validerAesthetic(string $nom): void {
+        if (strlen($nom) < 2 || strlen($nom) > 100) {
+            throw new Exception('erreur_nom_aesthetic');
+        }
+    }
+
+    // Ajoute un aesthetic à un quiz
+    public function addAesthetic(int $idQuiz, string $nom, ?string $description, ?string $image): void {
+        $sql = "INSERT INTO aesthetic (nom, description, image, id_quiz) VALUES (:nom, :description, :image, :id_quiz)";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':nom', $nom);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+    }
+
+    // Modifie un aesthetic (seulement s'il appartient bien à ce quiz)
+    public function updateAesthetic(int $id, int $idQuiz, string $nom, ?string $description, ?string $image): void {
+        $sql = "UPDATE aesthetic SET nom = :nom, description = :description, image = :image
+                WHERE id = :id AND id_quiz = :id_quiz";
+
+        $stmt = $this->database->getPdo()->prepare($sql);
+        $stmt->bindValue(':nom', $nom);
+        $stmt->bindValue(':description', $description);
+        $stmt->bindValue(':image', $image);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':id_quiz', $idQuiz);
+        $stmt->execute();
+    }
+
+    // Supprime un aesthetic et ce qui en dépend (réponses et résultats)
+    public function removeAesthetic(int $id): void {
+        $pdo = $this->database->getPdo();
+
+        $stmt = $pdo->prepare("DELETE FROM reponse WHERE id_aesthetic = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $stmt = $pdo->prepare("DELETE FROM resultat_quiz WHERE id_aesthetic = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        $stmt = $pdo->prepare("DELETE FROM aesthetic WHERE id = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
 }

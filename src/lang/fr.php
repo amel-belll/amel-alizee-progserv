@@ -170,4 +170,23 @@ return [
     'admin_quiz_ajoute' => 'Le quiz a été ajouté.',
     'admin_quiz_modifie' => 'Le quiz a été modifié.',
     'admin_quiz_introuvable' => "Ce quiz n'existe pas.",
+
+    // Administration des aesthetics
+    'admin_bouton_aesthetics' => 'Aesthetics',
+    'admin_aesthetics_titre' => 'Aesthetics du quiz',
+    'admin_retour_quiz' => '← Retour aux quiz',
+    'admin_col_nom' => 'Nom',
+    'admin_col_image' => 'Image',
+    'admin_aesthetic_ajouter_titre' => 'Ajouter un aesthetic',
+    'admin_aesthetic_modifier_titre' => 'Modifier un aesthetic',
+    'admin_retour_aesthetics' => '← Retour aux aesthetics',
+    'champ_nom' => 'Nom',
+    'champ_image_aesthetic' => 'Image (nom du fichier, facultatif)',
+    'champ_image_aesthetic_aide' => 'Le fichier doit se trouver dans le dossier images/aesthetics/, par exemple aesthetic-dorfic.jpg',
+    'admin_aesthetic_ajoute' => "L'aesthetic a été ajouté.",
+    'admin_aesthetic_modifie' => "L'aesthetic a été modifié.",
+    'admin_aesthetic_supprime' => "L'aesthetic a été supprimé.",
+    'admin_confirmer_suppression_aesthetic' => 'Supprimer cet aesthetic ? Les réponses qui y mènent seront aussi supprimées.',
+    'admin_aesthetic_introuvable' => "Cet aesthetic n'existe pas.",
+    'erreur_nom_aesthetic' => 'Le nom doit contenir entre 2 et 100 caractères.',
 ];

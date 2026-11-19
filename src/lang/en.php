@@ -182,4 +182,23 @@ return [
     'admin_quiz_ajoute' => 'The quiz has been added.',
     'admin_quiz_modifie' => 'The quiz has been updated.',
     'admin_quiz_introuvable' => 'This quiz does not exist.',
+
+    // Aesthetics administration
+    'admin_bouton_aesthetics' => 'Aesthetics',
+    'admin_aesthetics_titre' => 'Quiz aesthetics',
+    'admin_retour_quiz' => '← Back to quizzes',
+    'admin_col_nom' => 'Name',
+    'admin_col_image' => 'Image',
+    'admin_aesthetic_ajouter_titre' => 'Add an aesthetic',
+    'admin_aesthetic_modifier_titre' => 'Edit an aesthetic',
+    'admin_retour_aesthetics' => '← Back to aesthetics',
+    'champ_nom' => 'Name',
+    'champ_image_aesthetic' => 'Image (file name, optional)',
+    'champ_image_aesthetic_aide' => 'The file must be in the images/aesthetics/ folder, for example aesthetic-dorfic.jpg',
+    'admin_aesthetic_ajoute' => 'The aesthetic has been added.',
+    'admin_aesthetic_modifie' => 'The aesthetic has been updated.',
+    'admin_aesthetic_supprime' => 'The aesthetic has been deleted.',
+    'admin_confirmer_suppression_aesthetic' => 'Delete this aesthetic? The answers leading to it will also be deleted.',
+    'admin_aesthetic_introuvable' => 'This aesthetic does not exist.',
+    'erreur_nom_aesthetic' => 'The name must be between 2 and 100 characters.',
 ];
