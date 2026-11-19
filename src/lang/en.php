@@ -165,4 +165,11 @@ return [
     'admin_lien_musiques' => 'Music',
     'admin_lien_images' => 'Images',
     'admin_lien_quiz' => 'Quizzes',
+
+    // Quiz administration
+    'onglet_admin_quiz' => 'Quiz administration | Zoomy',
+    'admin_quiz_titre' => 'Quiz administration',
+    'admin_col_description' => 'Description',
+    'admin_confirmer_suppression_quiz' => 'Delete this quiz, its questions, aesthetics and results?',
+    'admin_quiz_supprime' => 'The quiz has been deleted.',
 ];

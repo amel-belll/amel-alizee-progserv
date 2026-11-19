@@ -153,4 +153,11 @@ return [
     'admin_lien_musiques' => 'Musiques',
     'admin_lien_images' => 'Images',
     'admin_lien_quiz' => 'Quiz',
+
+    // Administration des quiz
+    'onglet_admin_quiz' => 'Administration des quiz | Zoomy',
+    'admin_quiz_titre' => 'Administration des quiz',
+    'admin_col_description' => 'Description',
+    'admin_confirmer_suppression_quiz' => 'Supprimer ce quiz, ses questions, ses aesthetics et ses résultats ?',
+    'admin_quiz_supprime' => 'Le quiz a été supprimé.',
 ];

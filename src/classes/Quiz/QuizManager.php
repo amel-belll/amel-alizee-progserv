@@ -182,4 +182,34 @@ class QuizManager {
 
         return $resultats;
     }
+
+    // Supprime un quiz et tout ce qui lui est lié
+    public function removeQuiz(int $id): void {
+        $pdo = $this->database->getPdo();
+
+        // 1. Les réponses des questions de ce quiz
+        $stmt = $pdo->prepare("DELETE FROM reponse WHERE id_question IN (SELECT id FROM question WHERE id_quiz = :id)");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        // 2. Les questions du quiz
+        $stmt = $pdo->prepare("DELETE FROM question WHERE id_quiz = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        // 3. Les résultats enregistrés pour ce quiz
+        $stmt = $pdo->prepare("DELETE FROM resultat_quiz WHERE id_quiz = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        // 4. Les aesthetics du quiz
+        $stmt = $pdo->prepare("DELETE FROM aesthetic WHERE id_quiz = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        // 5. Enfin, le quiz lui-même
+        $stmt = $pdo->prepare("DELETE FROM quiz WHERE id = :id");
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+    }
 }
