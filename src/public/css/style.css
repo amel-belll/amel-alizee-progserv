@@ -1188,3 +1188,10 @@ a.carte:hover .carte-image img {
 	object-fit: cover;
 	object-position: center;
 }
+
+.miniature-admin {
+	width: 4rem;
+	height: 4rem;
+	object-fit: cover;
+	border-radius: 8px;
+}
