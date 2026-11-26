@@ -70,7 +70,7 @@ if ($article !== null) {
                     <h1><?= htmlspecialchars($article->getTitre()) ?></h1>
 
                     <div class="contenu">
-                        <p><?= htmlspecialchars($article->getContenu()) ?></p>
+                        <p><?= nl2br(htmlspecialchars($article->getContenu())) ?></p>
                     </div>
                 </article>
             <?php } else { ?>
