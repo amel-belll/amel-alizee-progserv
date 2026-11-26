@@ -222,4 +222,19 @@ return [
     'admin_aucun_aesthetic' => 'First add aesthetics to this quiz.',
     'erreur_texte_question' => 'The question must be between 3 and 255 characters.',
     'erreur_reponses_minimum' => 'At least 2 answers are required.',
+
+    // Images administration
+    'onglet_admin_images' => 'Images administration | Zoomy',
+    'admin_images_titre' => 'Images administration',
+    'admin_col_fichier' => 'File',
+    'admin_image_ajouter_titre' => 'Add an image',
+    'admin_image_modifier_titre' => 'Edit an image',
+    'champ_fichier' => 'Image file name',
+    'champ_fichier_aide' => 'The file must be in the images/galerie/ folder, for example tenue.jpg',
+    'admin_image_ajoutee' => 'The image has been added.',
+    'admin_image_modifiee' => 'The image has been updated.',
+    'admin_image_supprimee' => 'The image has been deleted.',
+    'admin_confirmer_suppression_image' => 'Delete this image?',
+    'admin_image_introuvable' => 'This image does not exist.',
+    'erreur_fichier_obligatoire' => 'The file name is required.',
 ];

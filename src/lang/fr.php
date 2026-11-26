@@ -210,4 +210,19 @@ return [
     'admin_aucun_aesthetic' => "Ajoute d'abord des aesthetics à ce quiz.",
     'erreur_texte_question' => 'La question doit contenir entre 3 et 255 caractères.',
     'erreur_reponses_minimum' => 'Il faut au moins 2 réponses.',
+
+    // Administration des images
+    'onglet_admin_images' => 'Administration des images | Zoomy',
+    'admin_images_titre' => 'Administration des images',
+    'admin_col_fichier' => 'Fichier',
+    'admin_image_ajouter_titre' => 'Ajouter une image',
+    'admin_image_modifier_titre' => 'Modifier une image',
+    'champ_fichier' => "Nom du fichier de l'image",
+    'champ_fichier_aide' => 'Le fichier doit se trouver dans le dossier images/galerie/, par exemple tenue.jpg',
+    'admin_image_ajoutee' => "L'image a été ajoutée.",
+    'admin_image_modifiee' => "L'image a été modifiée.",
+    'admin_image_supprimee' => "L'image a été supprimée.",
+    'admin_confirmer_suppression_image' => 'Supprimer cette image ?',
+    'admin_image_introuvable' => "Cette image n'existe pas.",
+    'erreur_fichier_obligatoire' => 'Le nom du fichier est obligatoire.',
 ];
