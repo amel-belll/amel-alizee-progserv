@@ -237,4 +237,26 @@ return [
     'admin_confirmer_suppression_image' => 'Delete this image?',
     'admin_image_introuvable' => 'This image does not exist.',
     'erreur_fichier_obligatoire' => 'The file name is required.',
+
+
+    // Music administration
+    'onglet_admin_musiques' => 'Music administration | Zoomy',
+    'admin_musiques_titre' => 'Music administration',
+    'admin_col_artiste' => 'Artist',
+    'admin_col_genre' => 'Genre',
+    'admin_musique_ajouter_titre' => 'Add a song',
+    'admin_musique_modifier_titre' => 'Edit a song',
+    'champ_artiste' => 'Artist',
+    'champ_genre' => 'Genre (optional)',
+    'champ_pochette' => 'Cover (optional)',
+    'champ_pochette_aide' => 'Cover file name, for example cover.jpg',
+    'champ_lien' => 'YouTube video ID',
+    'champ_lien_aide' => 'Only the ID, not the full address. For https://www.youtube.com/watch?v=dQw4w9WgXcQ, write dQw4w9WgXcQ',
+    'admin_musique_ajoutee' => 'The song has been added.',
+    'admin_musique_modifiee' => 'The song has been updated.',
+    'admin_musique_supprimee' => 'The song has been deleted.',
+    'admin_confirmer_suppression_musique' => 'Delete this song?',
+    'admin_musique_introuvable' => 'This song does not exist.',
+    'erreur_artiste_longueur' => 'The artist must be between 1 and 255 characters.',
+    'erreur_lien_obligatoire' => 'The YouTube video ID is required.',
 ];
