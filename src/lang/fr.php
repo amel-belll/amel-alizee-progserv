@@ -225,4 +225,26 @@ return [
     'admin_confirmer_suppression_image' => 'Supprimer cette image ?',
     'admin_image_introuvable' => "Cette image n'existe pas.",
     'erreur_fichier_obligatoire' => 'Le nom du fichier est obligatoire.',
+
+
+    // Administration des musiques
+    'onglet_admin_musiques' => 'Administration des musiques | Zoomy',
+    'admin_musiques_titre' => 'Administration des musiques',
+    'admin_col_artiste' => 'Artiste',
+    'admin_col_genre' => 'Genre',
+    'admin_musique_ajouter_titre' => 'Ajouter une musique',
+    'admin_musique_modifier_titre' => 'Modifier une musique',
+    'champ_artiste' => 'Artiste',
+    'champ_genre' => 'Genre (facultatif)',
+    'champ_pochette' => 'Pochette (facultatif)',
+    'champ_pochette_aide' => 'Nom du fichier de la pochette, par exemple pochette.jpg',
+    'champ_lien' => 'Identifiant de la vidéo YouTube',
+    'champ_lien_aide' => 'Seulement l\'identifiant, pas l\'adresse complète. Pour https://www.youtube.com/watch?v=dQw4w9WgXcQ, écris dQw4w9WgXcQ',
+    'admin_musique_ajoutee' => 'La musique a été ajoutée.',
+    'admin_musique_modifiee' => 'La musique a été modifiée.',
+    'admin_musique_supprimee' => 'La musique a été supprimée.',
+    'admin_confirmer_suppression_musique' => 'Supprimer cette musique ?',
+    'admin_musique_introuvable' => 'Cette musique n\'existe pas.',
+    'erreur_artiste_longueur' => 'L\'artiste doit contenir entre 1 et 255 caractères.',
+    'erreur_lien_obligatoire' => 'L\'identifiant de la vidéo YouTube est obligatoire.',
 ];
